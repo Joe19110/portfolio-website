@@ -1,0 +1,170 @@
+[
+  {
+    "id": "privasimu",
+    "name": "Privasimu",
+    "subtitle": "Privacy Compliance & AI Platform (ROPA & DPIA)",
+    "accent": "pink",
+    "tags": ["Frontend", "Backend Integration", "AI Engineering"],
+    "role": "Front-End Development & AI Agent Evaluation",
+    "type": "Internship, team project",
+    "summary": "A privacy compliance platform supporting ROPA and DPIA workflows, with AI-assisted compliance insight generation.",
+    "techTags": ["Next.js", "React", "TypeScript", "Tailwind CSS", "Laravel (PHP)", "PostgreSQL", "RAG", "Strapi"],
+    "status": "shipped",
+    "overview": "A privacy compliance platform supporting ROPA and DPIA workflows. Work spanned frontend architecture, API integration, compliance logic, DPIA risk visualization, and AI-assisted compliance insight generation — including evaluating the AI outputs themselves. I built features used by Privasimu's enterprise clients, including BCA, KAI, BRI Life, and Bluebird.",
+    "contributions": [
+      "ROPA platform: built and modified ROPA interfaces; connected frontend to backend APIs; worked with compliance data spanning Indonesian PDP, GDPR, UK GDPR, Singapore PDPA, and CCPA-related exports; structured compliance fields (Controller Identity, Data Subject Rights & Compliance Status, standards/required_for).",
+      "DPIA system & risk logic: I built the DPIA Insight interface — questions answered → risk classified → visualized → AI mitigation guidance. I implemented deterministic risk classification across four answer states (Penuh / Sebagian / Tidak / Tidak Berlaku) and a risk matrix (Penuh/Tidak Berlaku → (1,1), Sebagian → (3,3), Tidak → (4,5)); I built the question, heatmap, and summary views.",
+      "DPIA Insight AI: I built the frontend (Next.js/TypeScript/Tailwind) for an AI-assisted workflow — DPIA results pass through a Laravel API into an AI/RAG layer grounded in privacy/security standards, returning mitigation guidance.",
+      "RAG / ISO standards: I turned excerpts from ISO/IEC 27701:2025, ISO/IEC 20889:2018, and ISO/IEC 24745:2022 into grounded, Indonesian-language mitigation guidance, including handling missing-knowledge cases.",
+      "AI agent evaluation: I evaluated whether retrieved information supported AI answers and whether mitigation guidance was contextually relevant; implemented fallback behavior for unavailable AI/API key.",
+      "Shipped 5+ pages across 2 deployed platforms; contributed frontend/animations for KartiniLove.ai; worked with Strapi for blog/content."
+    ],
+    "stack": ["Next.js", "React", "TypeScript", "Tailwind CSS", "Laravel (PHP)", "PostgreSQL", "RAG", "Strapi"],
+    "links": [
+      { "label": "Live — privasimu.com", "url": "https://privasimu.com" },
+      { "label": "Demo video", "url": "https://youtu.be/b3HoGm2rBAo" },
+      { "label": "Monthly reports", "url": "https://bit.ly/4uBxCpg" }
+    ]
+  },
+  {
+    "id": "gender-income-gap",
+    "name": "Gender Income Gap Forecasting",
+    "subtitle": "Research",
+    "accent": "pink",
+    "tags": ["Data Science", "ML Research"],
+    "role": "Team member, research/modeling contribution",
+    "type": "Research paper project",
+    "summary": "Research analyzing the U.S. gender income gap using ACS PUMS data (2014–2023), comparing seven forecasting approaches before generating 2024–2026 projections.",
+    "techTags": ["Python", "pandas", "statsmodels", "Prophet", "XGBoost"],
+    "status": "shipped",
+    "overview": "Research analyzing the U.S. gender income gap using ACS PUMS data (2014–2023), comparing seven forecasting approaches via MASE before generating 2024–2026 projections. The 2024–2026 figures are presented as model projections, not predictions.",
+    "contributions": [
+      "Processed and analyzed 2014–2023 ACS PUMS data; calculated the 2023 gap: $25,684.",
+      "Compared Linear Regression, Prophet, LSTM, SARIMA, ARIMA, XGBoost, and a naive baseline.",
+      "Evaluated with MASE — Linear Regression 0.369, Prophet 0.377, LSTM 1.555, SARIMA 2.313, ARIMA 2.414, Naive 2.415, XGBoost 2.416 (the simpler models won).",
+      "I compared seven forecasting approaches and generated projections for 2024–2026: $25,872 · $26,380 · $26,889.",
+      "Documented methodology and findings in a research paper."
+    ],
+    "stack": ["Python", "pandas", "statsmodels", "Prophet", "XGBoost"],
+    "links": []
+  },
+  {
+    "id": "kitchen-serve",
+    "name": "Kitchen Serve+",
+    "subtitle": "",
+    "accent": "blue",
+    "tags": ["Backend", "Full-Stack"],
+    "role": "Full-Stack Developer, team project",
+    "type": "University group project, built for a real client (Cihen Kitchen)",
+    "summary": "A full-stack platform for Cihen Kitchen centralizing support, communication, and operational workflows.",
+    "techTags": ["React", "Vite", "Tailwind CSS", "Redux", "Node.js", "Express.js", "MongoDB", "JWT", "Cloudinary", "Swagger", "Docker", "Gemini", "Vercel"],
+    "status": "shipped",
+    "overview": "A full-stack platform for Cihen Kitchen centralizing support, communication, and operational workflows — ticketing, staff/customer portals, chat, and an AI chatbot.",
+    "contributions": [
+      "Built responsive interfaces with React, Vite, Tailwind CSS; used Redux for global state across portal/ticket/chat interfaces.",
+      "Integrated the frontend with a Node.js/Express REST API (auth, user data, tickets, conversations).",
+      "Implemented JWT authentication.",
+      "Integrated Gemini to power the in-app AI chatbot, connected to application context.",
+      "Used Cloudinary for media handling, Swagger for API docs.",
+      "Containerized with Docker; deployed on Vercel (zero-cost setup).",
+      "What went wrong: the deployed server went down at one point — a real lesson about the gap between a working local build and a maintained deployed service."
+    ],
+    "stack": ["React", "Vite", "Tailwind CSS", "Redux", "Node.js", "Express.js", "MongoDB", "JWT", "Cloudinary", "Swagger", "Docker", "Gemini", "Vercel"],
+    "links": [
+      { "label": "Live — kitchen-serve-frontend.vercel.app", "url": "https://kitchen-serve-frontend.vercel.app" },
+      { "label": "GitHub", "url": "https://github.com/Joe19110/KitchenServe" },
+      { "label": "Demo video", "url": "https://youtu.be/i31Xsk1Hf-o" }
+    ]
+  },
+  {
+    "id": "cuanin",
+    "name": "Cuanin",
+    "subtitle": "",
+    "accent": "mint",
+    "tags": ["Backend", "Mobile", "Product Thinking"],
+    "role": "Mobile Developer, one of two core developers",
+    "type": "Hackathon entry, group project",
+    "summary": "A React Native task marketplace (Giver/Doer) built around a full task lifecycle from creation to escrow payment and rating.",
+    "techTags": ["React Native", "Expo", "Firebase", "Zustand"],
+    "status": "shipped",
+    "overview": "A React Native task marketplace (Giver/Doer) built around a full task lifecycle: create → find/accept → communicate → complete → escrow payment → rate.",
+    "contributions": [
+      "Task lifecycle as a state machine (creation → acceptance → in-progress → completion → payment release → rating) — the most technically interesting part.",
+      "Separate Giver/Doer mobile workflows and the dual-role architecture end to end.",
+      "Real-time chat tied to an active task.",
+      "Escrow-based transaction flow: payment deposited → work performed → completion confirmed → funds released.",
+      "Ratings/reputation tied to completed tasks.",
+      "Notification flows around task and transaction events.",
+      "Real-time state via Zustand with secure live sessions in Firestore."
+    ],
+    "stack": ["React Native", "Expo", "Firebase", "Zustand"],
+    "links": [
+      { "label": "GitHub", "url": "https://github.com/dreamsdagger/cuanin" },
+      { "label": "APK release", "url": "https://github.com/dreamsdagger/cuanin/releases/tag/v1.0.0" }
+    ]
+  },
+  {
+    "id": "stemm-lab",
+    "name": "STEMM Lab",
+    "subtitle": "",
+    "accent": "mint",
+    "tags": ["Mobile", "Data Architecture"],
+    "role": "Mobile Developer — UI/UX, application development, local data architecture",
+    "type": "University group project",
+    "summary": "A React Native STEM-education app for children built around sensor-based activities, with offline-first local persistence.",
+    "techTags": ["React Native", "Expo", "SQLite", "Zustand"],
+    "status": "shipped",
+    "overview": "A React Native STEM-education app for children built around sensor-based activities. The real story is offline-first architecture and local persistence.",
+    "contributions": [
+      "UI/UX design and brainstorming, plus general application development.",
+      "Offline-first data flow: SQLite persistence → hydrates Zustand state → UI reads from state → changes persist back to SQLite.",
+      "Improved stored data from text-based to structured JSON — easier to parse, update, sync, and reuse."
+    ],
+    "stack": ["React Native", "Expo", "SQLite", "Zustand"],
+    "links": [
+      { "label": "GitHub", "url": "https://github.com/waengs/StemmLab" },
+      { "label": "APK release", "url": "https://github.com/waengs/StemmLab/releases/tag/v1.0.0" },
+      { "label": "Demo video", "url": "https://youtu.be/RCONOeSoBkA" }
+    ]
+  },
+  {
+    "id": "genshin-assistant",
+    "name": "Genshin Build & Team Comp Assistant",
+    "subtitle": "planned",
+    "accent": "pink",
+    "tags": ["Backend", "Data Engineering", "AI Engineering", "Solo"],
+    "role": "Solo, individually owned start to finish",
+    "type": "Personal project, built for genuine personal use",
+    "summary": "A RAG assistant over character build data (artifacts, weapons, team comps, talent materials) — a real tool for a real problem.",
+    "techTags": ["Python (FastAPI)", "Pinecone / pgvector", "RAGAS", "React"],
+    "status": "in-progress",
+    "overview": "A RAG assistant over character build data (artifacts, weapons, team comps, talent materials) — a real tool for a problem Joelliane actually has, not a demo exercise. Purpose-built to be the portfolio's fully solo, individually-owned, evaluated AI/data project with zero ownership ambiguity.",
+    "contributions": [],
+    "stack": ["Python (FastAPI)", "Pinecone / pgvector", "RAGAS", "React"],
+    "links": []
+  },
+  {
+    "id": "catch-n-collect",
+    "name": "Catch n' Collect",
+    "subtitle": "Pygame Claw Game",
+    "accent": "mint",
+    "tags": ["Solo project", "Systems/Graphics"],
+    "role": "Game Developer, solo",
+    "type": "University individual project",
+    "summary": "A web-playable 2D arcade game simulating a physical claw machine, with a custom rigid-body physics engine and persistent save system.",
+    "techTags": ["Python", "Pygame", "Pymunk", "Pygbag", "JSON"],
+    "status": "shipped",
+    "overview": "A web-playable 2D arcade game simulating a physical claw machine, with a custom rigid-body physics engine and persistent save system. Built for fun, solo.",
+    "contributions": [
+      "Independently engineered a real-time physics environment (collision, rigid-body dynamics).",
+      "Dynamic UI layout system for a \"digital stickerbook\" of collected prizes.",
+      "Optimized the game loop for browser play via Pygbag."
+    ],
+    "stack": ["Python", "Pygame", "Pymunk", "Pygbag", "JSON"],
+    "links": [
+      { "label": "GitHub", "url": "https://github.com/Joe19110/CatchnCollect" },
+      { "label": "Live — itch.io", "url": "https://joe19110.itch.io/catch-n-collect" },
+      { "label": "Demo video", "url": "https://youtu.be/yKY3DESpirU" }
+    ]
+  }
+]

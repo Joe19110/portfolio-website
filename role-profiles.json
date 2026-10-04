@@ -1,0 +1,22 @@
+{
+  "default": {
+    "heroTagline": "I build backend systems, data infrastructure, and the AI tooling that sits on top of them.",
+    "featured": ["desa", "privasimu", "gender-income-gap", "kitchen-serve"],
+    "leadSkillGroup": "Backend"
+  },
+  "backend": {
+    "heroTagline": "I build backend systems and the APIs, auth, and data layers underneath them.",
+    "featured": ["desa", "kitchen-serve", "cuanin", "privasimu"],
+    "leadSkillGroup": "Backend"
+  },
+  "data": {
+    "heroTagline": "I build data pipelines, evaluation tooling, and the infrastructure that keeps them trustworthy.",
+    "featured": ["desa", "gender-income-gap", "privasimu", "stemm-lab"],
+    "leadSkillGroup": "Data & AI"
+  },
+  "ai": {
+    "heroTagline": "I build AI tooling — RAG systems, evaluation pipelines, and agents with real tool access.",
+    "featured": ["desa", "privasimu", "genshin-assistant", "gender-income-gap"],
+    "leadSkillGroup": "Data & AI"
+  }
+}
