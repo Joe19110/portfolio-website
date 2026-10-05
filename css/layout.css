@@ -1,0 +1,80 @@
+/* ============================================================
+   layout.css — page scaffolding: containers, section shell,
+   the two-column "sticky rail" that gives desktop real structure,
+   and the responsive grids. Load after base.css.
+   ============================================================ */
+
+.container {
+  width: 100%;
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 0 28px;
+}
+.container--narrow { max-width: 820px; }
+
+.section { padding: var(--section-y) 0; }
+.section--sand { background: var(--sand); }
+.section + .section { border-top: 1px solid transparent; }
+
+/* ------------------------------------------------------------
+   Section shell: a sticky left rail (eyebrow + title + lead)
+   paired with a wide content column. This is the core fix for
+   the "empty on desktop" problem — the header anchors the left,
+   content fills the right, and the whole row uses the full width.
+   Collapses to a single stacked column below 900px.
+   ------------------------------------------------------------ */
+.layout {
+  display: grid;
+  grid-template-columns: minmax(220px, 300px) 1fr;
+  gap: clamp(28px, 5vw, 72px);
+  align-items: start;
+}
+.layout__rail {
+  position: sticky;
+  top: 96px;
+}
+.layout__body { min-width: 0; } /* lets grids inside shrink properly */
+
+@media (max-width: 900px) {
+  .layout {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .layout__rail { position: static; top: auto; }
+}
+
+/* ---------- Section header type (used in rail and standalone) ---------- */
+.eyebrow {
+  font-size: 12px;
+  color: var(--muted-soft);
+  margin: 0 0 10px;
+  letter-spacing: 0.01em;
+}
+.section__title {
+  font-size: clamp(28px, 3.4vw, 42px);
+  margin: 0 0 16px;
+}
+.section__lead {
+  color: var(--muted);
+  max-width: 60ch;
+  margin: 0;
+}
+
+/* ---------- Responsive card grids ---------- */
+.grid {
+  display: grid;
+  gap: 18px;
+}
+/* wider minimums so cards fill the roomier content column */
+.grid--featured { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+.grid--work     { grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); }
+
+/* ---------- Footer ---------- */
+.footer {
+  border-top: 1px solid var(--line);
+  padding: 44px 0;
+  text-align: center;
+  color: var(--muted);
+  font-size: 14px;
+}
+.footer__meta { font-size: 12px; margin-top: 8px; color: #a39e92; }

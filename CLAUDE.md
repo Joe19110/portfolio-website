@@ -496,13 +496,114 @@ renders first; the rest keep a stable order after it). No skill bars, no percent
 - **Cloud & DevOps:** Docker · CI/CD (GitHub Actions) · Vercel · GCP · Azure DevOps
 - **Tools:** Git/GitHub · Postman · Figma · VS Code · Expo
 
-## Page 6 — Leadership & Awards
+## Page 6 — Experience, Leadership, Education & Awards
 
-Short list, not project cards:
-- Robogals — Vice President
-- GDG (Google Developer Groups) — Technical Developer
-- Luggage Loss Prevention System — 1st Place, Creative Business Ideas Competition (concept +
-  presentation only, not implementation — one line, no project card)
+This page covers the non-project track record: professional experience, organizational
+leadership, education, certifications, awards, and languages. These are **not** project
+cards — render them as compact timeline entries / short list items, not the lifted project
+cards used in Work. Keep the same ownership-framing rule as everywhere else: "contributed
+to / supported / as part of the team" for group work, direct "I built / I led" only where
+the role genuinely owned the piece. Do not invent metrics or outcomes beyond what's listed.
+
+Dates are taken verbatim from LinkedIn as the source of truth. Note some are future-dated
+relative to a late-2026 build — see Open items before publishing.
+
+### Experience (professional / org work)
+
+Render as a reverse-chronological timeline. Group the multi-role organizations (BINUS
+University, Robogals) under one org header with their roles nested, matching how they read
+on LinkedIn.
+
+- **Associate Member Data Engineer** — Bina Nusantara IT Division · Mar 2026 – Present ·
+  Jakarta, on-site. This is the same role behind the DESA flagship; here keep it to a short
+  summary and let the Work/flagship section carry the depth. Built and maintained data
+  engineering pipelines (Python, SQL, PostgreSQL) to process and transform structured
+  datasets; developed ETL workflows to extract, clean, transform, and load data across
+  sources; integrated vector databases and RAG workflows for pipeline error intelligence;
+  worked with Langfuse and RAGAS to evaluate LLM retrieval quality and monitor AI pipeline
+  performance.
+- **IT Support Intern** — Privasimu · Internship · Sep 2025 – May 2026 · Jakarta, hybrid.
+  Same internship as the Privasimu project in Work; this entry is the role line, the Work
+  card carries the detail. Shipped production React interfaces for Kartinilove.ai and
+  Privasimu from approved Figma designs; built responsive, accessible UI across mobile /
+  tablet / desktop; integrated frontend with backend databases via REST APIs on real
+  production data; implemented CMS-driven features with Strapi; supported client-facing
+  projects for enterprise partners (BCA, BRI, KAI, Bluebird — Privasimu's clients, not hers);
+  contributed to chatbot features and early-stage AI integrations.
+- **Staff of Customer Experience, Global Volunteer** — AIESEC in Indonesia · Full-time ·
+  Feb 2026 – Present · Jakarta, hybrid. Managed participant communication and engagement
+  across the Global Volunteer journey; coordinated follow-ups with prospective volunteers and
+  improved response tracking across the recruitment pipeline; monitored participant feedback
+  to surface recurring concerns; collaborated cross-functionally to resolve participant
+  issues.
+- **BINUS University** (multiple roles) — Jakarta:
+  - **Team Promotion** — Part-time · Oct 2025 – Present. Supported event operations (operator,
+    usher, logistics); conducted sales calls for lead generation; managed customer comms over
+    WhatsApp; handled data entry / record keeping; supported marketing campaigns and events.
+  - **Freshmen Partner** — Sep 2025 – Aug 2026. Facilitated weekly sessions across two
+    semesters on academic readiness, university values, and personal development; mentored
+    freshmen through their transition; helped plan and run an SDG-aligned campaign project.
+  - **Teaching Assistant, Database Technology (COMP6799001)** — Sep 2025 – Jan 2026. Ran
+    weekly 100-minute lab sessions over 13 weeks for ~21 students; supported learning on ERDs,
+    normalization, and practical database design; guided hands-on lab exercises; conducted
+    assessments and gave feedback. (Good signal for the Data & AI / backend story.)
+  - **Mentor** — Feb 2025 – Jan 2026. Led small-group calculus mentoring for underclassmen;
+    organized sessions, gave personalized support, and helped prepare students for exams.
+  - **Freshman Leader** — Seasonal · Aug 2025 – Sep 2025. Guided incoming students through
+    their first two weeks; coordinated student mobility and daily FYP activities.
+- **Robogals Jakarta** (multiple roles) — Jakarta:
+  - **Vice President** — Aug 2025 – Aug 2026. Supported the President in chapter operations;
+    led coordination of cross-functional teams to plan and run STEM-outreach workshops and
+    events for young women; managed internal comms and delivery; represented the org with
+    external partners; contributed to strategic planning and leadership development.
+  - **Training Manager** — Oct 2024 – Aug 2025. Ran interactive STEM teaching sessions
+    encouraging female students toward computer science; helped deliver the Kiwihosting
+    workshop introducing web-hosting basics.
+- **Technical Developer** — GDSC Binus International · Nov 2024 – Aug 2025 · Jakarta, hybrid.
+  Supported planning and delivery of technical events including the Gemma Workshop; learned
+  and taught end-to-end workshop material (a note-taking web app integrated with Gemma AI);
+  built and demoed a working frontend showcasing generative-AI integration; gave real-time
+  guidance to participants; collaborated with a 10+ person core team on content accuracy.
+- **Activist, HIMTI Care** — HIMTI BINUS University · Mar 2025 – Apr 2026 · Jakarta, hybrid.
+  Contributed to planning community-care and well-being initiatives for HIMTI members
+  (mental health, stress relief, team bonding); programs described as in development — frame
+  as contribution, not shipped outcomes.
+- **Admin** — SheCodes Society · Feb 2025 – Jun 2025 · Jakarta, hybrid. Supported behind-the-
+  scenes operations (Google Classroom, group comms) for programs empowering women in STEM;
+  helped organize events including Kartini Day 2025 (panel on gender inclusivity in tech,
+  exhibition, AI-innovation workshops).
+
+### Education
+
+- **BINUS University International** — Bachelor's, Computer Science · Feb 2024 – Jan 2028 ·
+  GPA 3.95. Double degree with La Trobe University. Activities: Google Developer Group on
+  Campus, AIESEC, Robogals, HIMTI, Student Mentor, Teaching Assistant (Database Technology),
+  Freshmen Leader & Freshmen Partner for B29.
+- **La Trobe University** — Bachelor's, Software Engineering · Feb 2024 – Jan 2028. Double
+  degree with BINUS International.
+
+### Licenses & certifications
+
+- **Microsoft Certified: Azure AI Fundamentals** — Microsoft · Issued Mar 2026 · Credential
+  ID a04c9899-f87f-4ab2-a680-3eb8367315e6.
+
+### Honors & awards
+
+- **1st Place, Creative Business Ideas Competition** — BINUS University · Feb 2025. An
+  international competition jointly organized by Woosong University (South Korea), Swiss
+  German University, and BINUS University. The team proposed a sensor-based Luggage Loss
+  Prevention System to address baggage misplacement in travel, covering problem
+  identification, technical + business solution development, and a formal pitch to academic
+  and industry judges; praised for practicality, scalability, and real-world relevance. Keep
+  this a one-line award entry (concept + presentation only, not implementation) — no project
+  card. This is the same award referenced in the earlier short list; render it once.
+- **Widia Scholarship** — BINUS University · Feb 2024. Awarded for academic achievement in
+  high school; recognizes excellence, leadership potential, and the WIDIA values (Women,
+  Integrity, Diversity, Innovation, Agility). Keep to one or two lines.
+
+### Languages
+
+- English — fluent · Indonesian — fluent · Mandarin — basic
 
 ## Page 7 — Contact
 
@@ -515,6 +616,28 @@ Short list, not project cards:
 - Playful footer line: "Built with curiosity, caffeine, and questionable amounts of
   debugging."
 
+## Interactive feature ideas (backlog)
+
+Candidate interactive features, ordered by effort-to-payoff. Tone must stay "cute surface,
+technically serious underneath." Status tracked inline.
+
+1. **"Ask about my projects" chatbot widget** — a small chat bubble answering questions
+   like "what did she do with RAG?" grounded in the project data. Strongest pick: it *demos
+   the exact skill being sold* (RAG / retrieval), not just decoration. Start fully
+   client-side over the JSON; could later upgrade to a real retrieval backend. Must stay
+   honest — answer only from real project data, no hallucinated claims. **Status: planned.**
+2. **Live role-filter toggle** — visible Backend / Data / AI buttons that re-sort the
+   featured strip and skills in-page (exposes the existing `?for=` logic as a control). Low
+   effort, shows the role-aware design working. **Status: planned.**
+3. **Interactive DESA architecture diagram** — make the static boxes clickable; clicking a
+   node (e.g. "Error classifier") reveals what was built there. Turns the flagship into
+   something explored, not just read. **Status: planned.**
+4. **Project filter / search** — filter the work grid by tag (Backend, Mobile, AI) or tech.
+   Standard, useful, modest effort. **Status: planned.**
+5. **Interactive terminal** — extend the hero terminal so visitors can type commands
+   (`help`, `ls`, `whoami`, `cat about`, `skills`, `contact`, `clear`). Playful and
+   on-brand. **Status: BUILT.**
+
 ## Excluded / needs reframing before publishing
 
 - **Angkasa** (personal music app): built on Metrolist's YouTube Music playback/source logic,
@@ -524,6 +647,9 @@ Short list, not project cards:
   without naming or linking the underlying playback source.
 - **GitHub/docs chatbot idea**: too thin a dataset for a standalone project — keep in mind as
   a possible "ask about my projects" widget on the site itself, not a case study.
+- **PT. Jaxindo** (Marketplace Admin & Inventory Manager, Aug 2023 – Jan 2024): intentionally
+  omitted from the portfolio at Joelliane's request — not relevant to the backend / data /
+  AI story. Do not re-add it to the Experience timeline.
 
 ## Open items (resolve before launch)
 
@@ -537,6 +663,10 @@ Short list, not project cards:
   page as complete
 - One architecture diagram + trade-off write-up for an existing project (e.g. Postgres vs.
   MongoDB across Privasimu vs. Kitchen Serve+) — optional stretch addition
+- Confirm the experience/certification dates on Page 6. Several are future-dated relative to
+  a late-2026 build (Azure AI Fundamentals "Issued Mar 2026"; DESA "Mar 2026 – Present";
+  AIESEC "Feb 2026 – Present"). They're recorded verbatim from LinkedIn — verify before
+  publishing so nothing reads as a typo to a recruiter.
 
 ## Technical build notes
 

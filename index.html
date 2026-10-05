@@ -8,13 +8,22 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+  <!-- Segmented stylesheets, load order matters: base → layout → components → sections -->
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/sections.css">
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
 
-  <!-- Thin top strip -->
-  <div class="topstrip">Joelliane Anggra · Portfolio</div>
+  <!-- Shown only when opened via file:// — where ES modules + fetch are blocked by the browser -->
+  <div class="file-warning" id="file-warning" hidden>
+    <strong>This page is open as a file.</strong> The interactive sections (Work, Skills,
+    Experience, Education, Awards) load via JavaScript modules that browsers block on
+    <code>file://</code>. Run a local server and open <code>http://localhost:8137</code> instead —
+    e.g. <code>npx http-server -p 8137</code> in this folder.
+  </div>
 
   <!-- Nav -->
   <header class="nav-wrap">
@@ -30,6 +39,7 @@
       <ul class="nav__links" id="nav-links">
         <li><a href="#top">Home</a></li>
         <li><a href="#work">Work</a></li>
+        <li><a href="#experience">Experience</a></li>
         <li><a href="#about">About</a></li>
         <li><a href="#skills">Skills</a></li>
         <li><a href="#contact">Contact</a></li>
@@ -46,9 +56,9 @@
           <div class="hero__col">
             <span class="sticker" aria-hidden="true">✦</span>
             <h1 class="hero__headline" id="hero-headline">
-              <span class="highlight">I build</span> backend systems, data infrastructure, and the AI tooling that sits on top of them.
+              <span class="highlight">I build</span> backend systems, data pipelines, and the AI tooling on top.
             </h1>
-            <p class="hero__support">Currently building data engineering and AI tooling as part of the BINUS IT Division.</p>
+            <p class="hero__support">Currently building data engineering and AI tooling in the BINUS IT Division.</p>
             <div class="hero__cta">
               <a class="btn btn--pink" href="#work">
                 <span class="status-dot" aria-hidden="true"></span> View my work
@@ -56,17 +66,33 @@
               <a class="btn btn--ghost" href="#contact">Get in touch</a>
             </div>
           </div>
-          <aside class="hero__col hero__widget" aria-label="Terminal">
-            <div class="terminal">
+          <aside class="hero__col hero__widget" aria-label="Interactive terminal">
+            <div class="terminal" id="terminal">
               <div class="terminal__bar">
                 <span class="terminal__dot terminal__dot--r"></span>
                 <span class="terminal__dot terminal__dot--y"></span>
                 <span class="terminal__dot terminal__dot--g"></span>
                 <span class="terminal__title">zsh — joelliane@portfolio</span>
               </div>
-              <div class="terminal__body">
-                <p><span class="terminal__prompt">joelliane@portfolio:~$</span> <span id="typed"></span><span class="terminal__caret" aria-hidden="true"></span></p>
-                <div class="terminal__out" id="terminal-out" aria-hidden="true"></div>
+              <div class="terminal__body" id="terminal-body">
+                <!-- intro line (typewriter) -->
+                <p class="terminal__line"><span class="terminal__prompt">joelliane@portfolio:~$</span> <span id="typed"></span><span class="terminal__caret" id="intro-caret" aria-hidden="true"></span></p>
+                <div class="terminal__out" id="terminal-out"></div>
+                <!-- live log of entered commands + responses -->
+                <div class="terminal__log" id="terminal-log"></div>
+                <!-- interactive input line (revealed after intro) -->
+                <label class="terminal__inputline" id="terminal-inputline" hidden>
+                  <span class="terminal__prompt">joelliane@portfolio:~$</span>
+                  <input
+                    type="text"
+                    id="terminal-input"
+                    class="terminal__input"
+                    autocomplete="off"
+                    autocapitalize="off"
+                    spellcheck="false"
+                    aria-label="Type a command. Try: help"
+                    placeholder="type 'help' and hit enter">
+                </label>
               </div>
             </div>
           </aside>
@@ -81,22 +107,42 @@
     <!-- FEATURED STRIP -->
     <section class="section" id="featured">
       <div class="container">
-        <p class="eyebrow">Featured work</p>
-        <h2 class="section__title">A few things I've built</h2>
-        <div class="featured-grid" id="featured-grid"></div>
-        <p class="featured__more"><a href="#work">See all work ↓</a></p>
+        <div class="layout">
+          <div class="layout__rail">
+            <p class="eyebrow">Featured work</p>
+            <h2 class="section__title">A few things I've built</h2>
+            <p class="section__lead">A quick pick of recent projects — the full archive is further down.</p>
+            <p class="featured__more"><a href="#work">See all work ↓</a></p>
+          </div>
+          <div class="layout__body">
+            <div class="grid grid--featured" id="featured-grid"></div>
+          </div>
+        </div>
       </div>
     </section>
 
     <!-- ABOUT -->
     <section class="section section--sand" id="about">
-      <div class="container container--narrow">
-        <p class="eyebrow">About</p>
-        <h2 class="section__title">Hi, I'm Joelliane <span class="sticker sticker--inline" aria-hidden="true">👋</span></h2>
-        <div class="prose">
-          <p>I'm a third-year Computer Science and Software Engineering student who likes building things that are meant to be used, not just graded. I've worked on a mobile platform for STEM education, AI-powered features during my internship, and a physics-based claw machine game. They're different problems, but in each one the part I care about most is the same: taking an idea and figuring out how to make it actually work.</p>
-          <p>In practice, that means a lot of debugging. On Cuanin, that was tracking down why an escrow refund wasn't routing back to the right user. On STEMM Lab, it was figuring out why the app crashed when someone tapped a button too fast. I learn more from fixing problems like these than from the parts of a project that go smoothly the first time. That's part of why I try to design things with an actual user flow in mind — payments, login states, edge cases — instead of just building toward a spec.</p>
-          <p>It's also why I look for projects outside what I already know. New tools, unfamiliar problems, or people who approach things differently all mean more of that same kind of problem-solving, which is the part I've realized I actually want more of.</p>
+      <div class="container">
+        <div class="layout">
+          <div class="layout__rail">
+            <p class="eyebrow">About</p>
+            <h2 class="section__title">Hi, I'm Joelliane <span class="sticker sticker--inline" aria-hidden="true">👋</span></h2>
+            <p class="section__lead">A student who likes building things meant to be used, not just graded.</p>
+          </div>
+          <div class="layout__body">
+            <div class="about__body">
+              <div class="prose">
+                <p>I'm a third-year Computer Science and Software Engineering student who likes building things that are meant to be used, not just graded. I've worked on a mobile platform for STEM education, AI-powered features during my internship, and a physics-based claw machine game. They're different problems, but in each one the part I care about most is the same: taking an idea and figuring out how to make it actually work.</p>
+                <p>In practice, that means a lot of debugging. On Cuanin, that was tracking down why an escrow refund wasn't routing back to the right user. On STEMM Lab, it was figuring out why the app crashed when someone tapped a button too fast. I learn more from fixing problems like these than from the parts of a project that go smoothly the first time. That's part of why I try to design things with an actual user flow in mind — payments, login states, edge cases — instead of just building toward a spec.</p>
+                <p>It's also why I look for projects outside what I already know. New tools, unfamiliar problems, or people who approach things differently all mean more of that same kind of problem-solving, which is the part I've realized I actually want more of.</p>
+              </div>
+              <aside class="now-card" aria-label="Currently">
+                <h3><span class="status-dot" aria-hidden="true"></span> Currently</h3>
+                <ul id="now-list"></ul>
+              </aside>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -104,80 +150,93 @@
     <!-- FLAGSHIP: DESA -->
     <section class="section" id="desa">
       <div class="container">
-        <p class="eyebrow">Flagship project</p>
-        <div class="flagship">
-          <div class="flagship__head">
+        <div class="layout">
+          <div class="layout__rail">
+            <p class="eyebrow">Flagship project</p>
             <h2 class="section__title">BINUS EDM DESA</h2>
             <div class="pill-row">
               <span class="pill pill--blue">Backend</span>
               <span class="pill pill--pink">Data Engineering</span>
               <span class="pill pill--pink">AI Engineering</span>
             </div>
-            <p class="flagship__meta"><strong>Role:</strong> Associate Member Data Engineer, BINUS IT Division</p>
-            <p class="flagship__meta"><strong>Type:</strong> Internal tool, in active rollout — the full data engineering team is migrating onto it as their primary workflow tool.</p>
+            <p class="section__lead">The deepest, most current work — at the intersection of all three focus areas.</p>
           </div>
-
-          <div class="flagship__body">
-            <h3 class="h3">Overview</h3>
-            <p>An internal platform centralizing the data engineering team's workflow — pipeline failures, data quality issues, access requests, schema changes, source onboarding — replacing ad-hoc ticket handling with one system. It includes an AI chatbot with tool access to live pipeline infrastructure.</p>
-
-            <h3 class="h3">What I built</h3>
-            <ul class="checklist">
-              <li>Built a data sanitization step and, downstream of it, an error classifier for automated error detection within Delman pipelines.</li>
-              <li>Linked the error-classification pipeline to Langfuse for tracing and observability.</li>
-              <li>Implemented the RAGAS evaluation pipeline for the project's RAG system.</li>
-              <li>Implemented RustFS (S3-compatible object storage) integration for pipeline archive storage.</li>
-              <li>Built complex chatbot features including command/skill-based actions, not just Q&A.</li>
-              <li>Built the FastAPI backend tying these pieces together, with MCP giving the chatbot direct tool access to Delman pipeline operations.</li>
-              <li>Used Docker for containerized execution and n8n for workflow automation.</li>
-            </ul>
-
-            <h3 class="h3">Architecture</h3>
-            <div class="arch" role="img" aria-label="Architecture: Delman pipeline feeds a sanitization step, then an error classifier traced in Langfuse. A FastAPI backend connects a RAG system evaluated with RAGAS, RustFS archive storage, and an AI chatbot that reaches Delman operations through MCP tools.">
-              <div class="arch__row">
-                <div class="arch__node arch__node--blue">Delman pipelines</div>
-                <span class="arch__arrow">→</span>
-                <div class="arch__node arch__node--pink">Sanitization step</div>
-                <span class="arch__arrow">→</span>
-                <div class="arch__node arch__node--pink">Error classifier</div>
-                <span class="arch__arrow">→</span>
-                <div class="arch__node arch__node--sand">Langfuse (tracing)</div>
+          <div class="layout__body">
+            <div class="flagship">
+              <div class="flagship__head">
+                <p class="flagship__meta"><strong>Role:</strong> Associate Member Data Engineer, BINUS IT Division</p>
+                <p class="flagship__meta"><strong>Type:</strong> Internal tool, in active rollout — the full data engineering team is migrating onto it as their primary workflow tool.</p>
+                <h3 class="h3" style="margin-top:18px">Overview</h3>
+                <p>An internal platform centralizing the data engineering team's workflow — pipeline failures, data quality issues, access requests, schema changes, source onboarding — replacing ad-hoc ticket handling with one system. It includes an AI chatbot with tool access to live pipeline infrastructure.</p>
               </div>
-              <div class="arch__row">
-                <div class="arch__node arch__node--blue">FastAPI backend</div>
-                <span class="arch__arrow">↔</span>
-                <div class="arch__node arch__node--pink">RAG system</div>
-                <span class="arch__arrow">→</span>
-                <div class="arch__node arch__node--sand">RAGAS eval</div>
+
+              <div class="flagship__cols">
+                <div>
+                  <h3 class="h3">What I built</h3>
+                  <ul class="checklist">
+                    <li>Built a data sanitization step and, downstream of it, an error classifier for automated error detection within Delman pipelines.</li>
+                    <li>Linked the error-classification pipeline to Langfuse for tracing and observability.</li>
+                    <li>Implemented the RAGAS evaluation pipeline for the project's RAG system.</li>
+                    <li>Implemented RustFS (S3-compatible object storage) integration for pipeline archive storage.</li>
+                    <li>Built complex chatbot features including command/skill-based actions, not just Q&A.</li>
+                    <li>Built the FastAPI backend tying these pieces together, with MCP giving the chatbot direct tool access to Delman pipeline operations.</li>
+                    <li>Used Docker for containerized execution and n8n for workflow automation.</li>
+                  </ul>
+                  <h3 class="h3">Stack</h3>
+                  <div class="pill-row" id="desa-stack"></div>
+                </div>
+
+                <div>
+                  <h3 class="h3">Architecture</h3>
+                  <div class="arch__panel">
+                    <div class="arch" role="img" aria-label="Architecture: Delman pipeline feeds a sanitization step, then an error classifier traced in Langfuse. A FastAPI backend connects a RAG system evaluated with RAGAS, RustFS archive storage, and an AI chatbot that reaches Delman operations through MCP tools.">
+                      <div class="arch__row">
+                        <div class="arch__node arch__node--blue">Delman pipelines</div>
+                        <span class="arch__arrow">→</span>
+                        <div class="arch__node arch__node--pink">Sanitization</div>
+                        <span class="arch__arrow">→</span>
+                        <div class="arch__node arch__node--pink">Error classifier</div>
+                      </div>
+                      <div class="arch__row">
+                        <span class="arch__arrow">↳</span>
+                        <div class="arch__node arch__node--sand">Langfuse (tracing)</div>
+                      </div>
+                      <div class="arch__row">
+                        <div class="arch__node arch__node--blue">FastAPI backend</div>
+                        <span class="arch__arrow">↔</span>
+                        <div class="arch__node arch__node--pink">RAG system</div>
+                        <span class="arch__arrow">→</span>
+                        <div class="arch__node arch__node--sand">RAGAS eval</div>
+                      </div>
+                      <div class="arch__row">
+                        <div class="arch__node arch__node--blue">FastAPI backend</div>
+                        <span class="arch__arrow">↔</span>
+                        <div class="arch__node arch__node--sand">RustFS (archive)</div>
+                      </div>
+                      <div class="arch__row">
+                        <div class="arch__node arch__node--pink">AI chatbot</div>
+                        <span class="arch__arrow">→</span>
+                        <div class="arch__node arch__node--sand">MCP tools</div>
+                        <span class="arch__arrow">→</span>
+                        <div class="arch__node arch__node--blue">Delman ops</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div class="arch__row">
-                <div class="arch__node arch__node--blue">FastAPI backend</div>
-                <span class="arch__arrow">↔</span>
-                <div class="arch__node arch__node--sand">RustFS (archive storage)</div>
-              </div>
-              <div class="arch__row">
-                <div class="arch__node arch__node--pink">AI chatbot</div>
-                <span class="arch__arrow">→</span>
-                <div class="arch__node arch__node--sand">MCP tools</div>
-                <span class="arch__arrow">→</span>
-                <div class="arch__node arch__node--blue">Delman operations</div>
+
+              <div class="flagship__links-block">
+                <h3 class="h3">Links</h3>
+                <div class="callout">Internal tool; code not public due to confidentiality. Demo video below.</div>
+                <ul class="desa-artifacts">
+                  <li>A screen-recorded demo video (e.g. the error classifier catching a bad pipeline run, or the chatbot executing a command/skill).</li>
+                  <li>A simplified architecture diagram with no internal URLs, server names, or proprietary logic (above).</li>
+                  <li>The chatbot's system prompt and command/skill definitions, with a note on guardrails.</li>
+                  <li>The MCP tool schema exposed to the model, with parameter descriptions.</li>
+                  <li>A short explanation of the sanitization → classification pipeline logic.</li>
+                </ul>
               </div>
             </div>
-
-            <h3 class="h3">Stack</h3>
-            <div class="pill-row" id="desa-stack"></div>
-
-            <h3 class="h3">Links</h3>
-            <div class="callout">
-              Internal tool; code not public due to confidentiality. Demo video below.
-            </div>
-            <ul class="desa-artifacts">
-              <li>A screen-recorded demo video (e.g. the error classifier catching a bad pipeline run, or the chatbot executing a command/skill).</li>
-              <li>A simplified architecture diagram with no internal URLs, server names, or proprietary logic (above).</li>
-              <li>The chatbot's system prompt and command/skill definitions, with a note on guardrails.</li>
-              <li>The MCP tool schema exposed to the model, with parameter descriptions.</li>
-              <li>A short explanation of the sanitization → classification pipeline logic.</li>
-            </ul>
           </div>
         </div>
       </div>
@@ -186,58 +245,104 @@
     <!-- WORK GRID -->
     <section class="section section--sand" id="work">
       <div class="container">
-        <p class="eyebrow">Work</p>
-        <h2 class="section__title">Full project archive</h2>
-        <p class="section__lead">Every project is equally reachable here, no matter which link brought you in.</p>
-        <div class="work-grid" id="work-grid"></div>
+        <div class="layout">
+          <div class="layout__rail">
+            <p class="eyebrow">Work</p>
+            <h2 class="section__title">Full project archive</h2>
+            <p class="section__lead">Every project is equally reachable here, no matter which link brought you in.</p>
+          </div>
+          <div class="layout__body">
+            <div class="grid grid--work" id="work-grid"></div>
+          </div>
+        </div>
       </div>
     </section>
 
-    <!-- SKILLS -->
+    <!-- EXPERIENCE (timeline) -->
+    <section class="section" id="experience">
+      <div class="container">
+        <div class="layout">
+          <div class="layout__rail">
+            <p class="eyebrow">Experience</p>
+            <h2 class="section__title">What I've worked on</h2>
+            <p class="section__lead">Paid work and teaching, plus the student orgs I've helped run. Most recent first.</p>
+          </div>
+          <div class="layout__body">
+            <div class="tl-group">
+              <h3 class="tl-group__title">Work &amp; teaching</h3>
+              <div class="timeline" id="timeline-work"></div>
+            </div>
+            <div class="tl-group">
+              <h3 class="tl-group__title">Organizations</h3>
+              <div class="timeline" id="timeline-org"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS — datasheet / spec-sheet rows, full width, no rail -->
     <section class="section" id="skills">
       <div class="container">
-        <p class="eyebrow">Skills</p>
-        <h2 class="section__title">Tools I reach for</h2>
-        <div class="skills-grid" id="skills-grid"></div>
+        <header class="section-head">
+          <p class="eyebrow">Skills</p>
+          <h2 class="section__title">Tools I reach for</h2>
+          <p class="section__lead">Grouped by what they're for — the top group shifts with how you got here.</p>
+        </header>
+        <dl class="skillsheet" id="skills-sheet"></dl>
       </div>
     </section>
 
-    <!-- LEADERSHIP -->
-    <section class="section section--sand" id="leadership">
-      <div class="container container--narrow">
-        <p class="eyebrow">Leadership & awards</p>
-        <h2 class="section__title">Beyond the code</h2>
-        <ul class="lead-list">
-          <li><strong>Robogals</strong> — Vice President</li>
-          <li><strong>GDG (Google Developer Groups)</strong> — Technical Developer</li>
-          <li><strong>Luggage Loss Prevention System</strong> — 1st Place, Creative Business Ideas Competition (concept + presentation only)</li>
-        </ul>
+    <!-- EDUCATION — two schools side by side, bridged by "double degree" -->
+    <section class="section section--sand" id="education">
+      <div class="container">
+        <header class="section-head">
+          <p class="eyebrow">Education</p>
+          <h2 class="section__title">Where I study</h2>
+          <p class="section__lead">One double degree, two universities, run in parallel.</p>
+        </header>
+        <div class="edu-split" id="education-grid"></div>
       </div>
     </section>
 
-    <!-- CONTACT -->
-    <section class="section" id="contact">
-      <div class="container container--narrow">
-        <p class="eyebrow">Contact</p>
-        <h2 class="section__title">Let's build something <span class="sticker sticker--inline" aria-hidden="true">🚀</span></h2>
-        <p class="section__lead">Interested in working together, discussing a project, or talking tech?</p>
-        <div class="contact-grid">
-          <a class="card contact-card" href="mailto:joelliane@gmail.com">
-            <span class="contact-card__label">Email</span>
-            <span class="contact-card__value">joelliane@gmail.com</span>
-          </a>
-          <a class="card contact-card" href="tel:+6285920765585">
-            <span class="contact-card__label">Phone</span>
-            <span class="contact-card__value">+62 859 2076 5585</span>
-          </a>
-          <a class="card contact-card" href="https://linkedin.com/in/joelliane-anggra" target="_blank" rel="noopener">
-            <span class="contact-card__label">LinkedIn</span>
-            <span class="contact-card__value">in/joelliane-anggra</span>
-          </a>
-          <a class="card contact-card" href="https://github.com/Joe19110" target="_blank" rel="noopener">
-            <span class="contact-card__label">GitHub</span>
-            <span class="contact-card__value">Joe19110</span>
-          </a>
+    <!-- AWARDS — one hero award + a compact sidebar of certs/languages -->
+    <section class="section" id="awards">
+      <div class="container">
+        <header class="section-head">
+          <p class="eyebrow">Awards &amp; recognition</p>
+          <h2 class="section__title">Beyond the code</h2>
+        </header>
+        <div class="awards-layout">
+          <div class="awards-main" id="awards-list"></div>
+          <aside class="awards-side">
+            <div class="awards-side__block">
+              <h3 class="awards-side__title">Certifications</h3>
+              <ul class="mini-list" id="cert-list"></ul>
+            </div>
+            <div class="awards-side__block">
+              <h3 class="awards-side__title">Languages</h3>
+              <ul class="mini-list" id="lang-list"></ul>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT — centered call-to-action band, no rail -->
+    <section class="section section--contact" id="contact">
+      <div class="container">
+        <div class="contact-cta">
+          <p class="eyebrow">Contact</p>
+          <h2 class="contact-cta__title">Let's build something <span class="sticker sticker--inline" aria-hidden="true">🚀</span></h2>
+          <p class="contact-cta__lead">Interested in working together, discussing a project, or just talking tech?</p>
+          <a class="contact-cta__email" href="mailto:joelliane@gmail.com">joelliane@gmail.com</a>
+          <div class="contact-cta__links">
+            <a href="tel:+6285920765585">+62 859 2076 5585</a>
+            <span class="contact-cta__sep" aria-hidden="true">·</span>
+            <a href="https://linkedin.com/in/joelliane-anggra" target="_blank" rel="noopener">LinkedIn</a>
+            <span class="contact-cta__sep" aria-hidden="true">·</span>
+            <a href="https://github.com/Joe19110" target="_blank" rel="noopener">GitHub</a>
+          </div>
         </div>
       </div>
     </section>
@@ -259,6 +364,6 @@
     </div>
   </div>
 
-  <script src="app.js"></script>
+  <script type="module" src="js/main.js"></script>
 </body>
 </html>

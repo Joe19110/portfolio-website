@@ -1,0 +1,94 @@
+/* ============================================================
+   base.css — design tokens, reset, global primitives, keyframes
+   Load FIRST. Everything else depends on :root tokens here.
+   Tokens from CLAUDE.md (visual reference section wins).
+   ============================================================ */
+
+:root {
+  --bg: #FDFCF8;
+  --ink: #1A1A1A;
+  --pink: #F4C0D1;
+  --pink-ink: #4B1528;
+  --blue: #E6F1FB;
+  --blue-ink: #0C447C;
+  --mint: #E1F5EE;
+  --mint-ink: #085041;
+  --sand: #F4F1EA;
+  --line: #E4E1D8;
+
+  --muted: #6b665c;
+  --muted-soft: #8a857a;
+  --body-ink: #3a362f;
+
+  --font-display: 'Sora', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+  --font-mono: 'SFMono-Regular', ui-monospace, 'Cascadia Code', Menlo, Consolas, monospace;
+
+  --maxw: 1200px;
+  --radius: 16px;
+
+  /* responsive vertical rhythm — replaces the flat 100px gaps */
+  --section-y: clamp(56px, 8vw, 104px);
+}
+
+/* ---------- Reset / base ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 84px;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  line-height: 1.1;
+}
+
+a { color: inherit; }
+
+img { max-width: 100%; display: block; }
+
+:focus-visible {
+  outline: 2px solid var(--blue-ink);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  background: var(--ink);
+  color: #fff;
+  padding: 10px 16px;
+  z-index: 200;
+}
+.skip-link:focus { left: 12px; top: 12px; }
+
+/* ---------- Keyframes (global; kept with base so consumers always resolve) ---------- */
+@keyframes pulse {
+  0%   { box-shadow: 0 0 0 0 rgba(47,174,122,0.5); }
+  70%  { box-shadow: 0 0 0 7px rgba(47,174,122,0); }
+  100% { box-shadow: 0 0 0 0 rgba(47,174,122,0); }
+}
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+@keyframes blink { 50% { opacity: 0; } }
+
+/* ---------- Global reduced-motion safety net ---------- */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
