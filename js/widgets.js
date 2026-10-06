@@ -4,7 +4,7 @@
    ============================================================ */
 
 import { $, $$, esc, prefersReduced } from './utils.js';
-import { MARQUEE_TEXT, SKILL_GROUPS, EXPERIENCE } from './data.js';
+import { MARQUEE_ITEMS, SKILL_GROUPS, EXPERIENCE } from './data.js';
 
 /* ============================================================
    Interactive terminal
@@ -114,8 +114,12 @@ function runCommand(raw, ctx) {
     printBlock(log, '', null);
   } else if (cmd === 'clear') {
     log.innerHTML = '';
-    const intro = $('#terminal-out');
-    if (intro) intro.innerHTML = '';
+    // also remove the typewriter intro (prompt line + its output) so the
+    // screen is genuinely blank — not a bare "whoami" with nothing under it
+    const introLine = $('#intro-line');
+    if (introLine) introLine.remove();
+    const introOut = $('#terminal-out');
+    if (introOut) introOut.innerHTML = '';
   } else if (COMMANDS[cmd]) {
     printBlock(log, raw.trim(), COMMANDS[cmd]());
   } else {
@@ -224,9 +228,96 @@ export function runTerminal() {
 export function renderMarquee() {
   const track = $('#marquee-track');
   if (!track) return;
-  const unit = ` ${MARQUEE_TEXT} `;
-  const seam = Array(6).fill(`<span>${esc(unit)}\u2726</span>`).join('');
-  track.innerHTML = seam + seam;
+  // one full pass through the messages, each followed by a ✦ separator
+  const pass = MARQUEE_ITEMS
+    .map((msg) => `<span>&nbsp;${esc(msg)}&nbsp;\u2726</span>`)
+    .join('');
+  // duplicate back-to-back so the -50% CSS loop has no visible seam
+  track.innerHTML = pass + pass;
+}
+
+/* ---------- Accessible tabs ----------
+   Wires any [role=tablist] inside the given container id. Click + arrow-key
+   navigation (Left/Right/Home/End), roving tabindex, aria-selected sync. */
+export function wireTabs(containerId) {
+  const root = $(containerId);
+  if (!root) return;
+  const tabs = [...root.querySelectorAll('[role="tab"]')];
+  if (!tabs.length) return;
+
+  const select = (tab, focus = true) => {
+    tabs.forEach((t) => {
+      const selected = t === tab;
+      t.setAttribute('aria-selected', String(selected));
+      t.tabIndex = selected ? 0 : -1;
+      const panel = $(`#${t.getAttribute('aria-controls')}`);
+      if (panel) panel.hidden = !selected;
+    });
+    if (focus) tab.focus();
+  };
+
+  tabs.forEach((tab, i) => {
+    tab.addEventListener('click', () => select(tab, false));
+    tab.addEventListener('keydown', (e) => {
+      let next = null;
+      if (e.key === 'ArrowRight') next = tabs[(i + 1) % tabs.length];
+      else if (e.key === 'ArrowLeft') next = tabs[(i - 1 + tabs.length) % tabs.length];
+      else if (e.key === 'Home') next = tabs[0];
+      else if (e.key === 'End') next = tabs[tabs.length - 1];
+      if (next) { e.preventDefault(); select(next); }
+    });
+  });
+}
+
+/* ---------- Scroll-spy: highlight the nav link for the section in view ---------- */
+export function wireScrollSpy() {
+  const links = $$('#nav-links a');
+  if (!links.length) return;
+
+  // map each nav link to the section it targets (only in-page #anchors)
+  const map = links
+    .map((link) => {
+      const id = (link.getAttribute('href') || '').replace('#', '');
+      const section = id ? document.getElementById(id) : null;
+      return section ? { link, section } : null;
+    })
+    .filter(Boolean);
+  if (!map.length) return;
+
+  const setActive = (link) => {
+    map.forEach(({ link: l }) => {
+      const on = l === link;
+      l.classList.toggle('is-active', on);
+      if (on) l.setAttribute('aria-current', 'true');
+      else l.removeAttribute('aria-current');
+    });
+  };
+
+  // track which observed sections are currently intersecting; highlight the topmost
+  const visible = new Set();
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (e.isIntersecting) visible.add(e.target);
+      else visible.delete(e.target);
+    });
+    // choose the visible section nearest the top of the viewport
+    let best = null;
+    map.forEach(({ section }) => {
+      if (!visible.has(section)) return;
+      const top = section.getBoundingClientRect().top;
+      if (best === null || top < best.top) best = { section, top };
+    });
+    if (best) {
+      const entry = map.find((m) => m.section === best.section);
+      if (entry) setActive(entry.link);
+    }
+  }, {
+    // trigger when a section crosses the upper third, under the sticky nav
+    rootMargin: '-84px 0px -60% 0px',
+    threshold: 0,
+  });
+
+  map.forEach(({ section }) => observer.observe(section));
 }
 
 /* ---------- Nav hamburger toggle ---------- */

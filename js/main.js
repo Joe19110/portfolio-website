@@ -10,7 +10,7 @@ import {
   renderNowCard, renderExperience, renderEducation, renderAwards,
   renderHeroTagline, wireModal,
 } from './render.js';
-import { runTerminal, renderMarquee, wireNav } from './widgets.js';
+import { runTerminal, renderMarquee, wireNav, wireTabs, wireScrollSpy } from './widgets.js';
 
 /* run a renderer in isolation so one failure can't blank the rest of the page */
 function safe(label, fn) {
@@ -40,7 +40,9 @@ async function init() {
   safe('awards', renderAwards);
   safe('modal', wireModal);
   safe('nav', wireNav);
+  safe('scrollSpy', wireScrollSpy);
   safe('terminal', runTerminal);
+  safe('desaTabs', () => wireTabs('#desa-tabs'));
 
   try {
     const [projects, profiles] = await Promise.all([

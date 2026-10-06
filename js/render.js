@@ -102,10 +102,13 @@ export function renderFeatured() {
   });
 }
 
-/* ---------- Work grid (all projects) ---------- */
+/* ---------- Work grid (flagship first, then all projects) ---------- */
 export function renderWork() {
   const grid = $('#work-grid');
   grid.innerHTML = '';
+  // DESA leads the archive as a card that links to its flagship section
+  // (keeps one source of truth — no duplicated case-study content in a modal)
+  grid.appendChild(desaFeaturedCard());
   state.projects.forEach((p) => grid.appendChild(projectCard(p)));
 }
 
@@ -122,15 +125,9 @@ export function renderSkills() {
   });
   ordered.forEach((group) => {
     const row = el('div', 'skillsheet__row');
-    if (group.name === lead) row.classList.add('is-lead');
 
     const dt = el('dt', 'skillsheet__label');
     dt.textContent = group.name;
-    if (group.name === lead) {
-      const tag = el('span', 'skillsheet__leadtag');
-      tag.textContent = 'focus';
-      dt.appendChild(tag);
-    }
 
     const dd = el('dd', 'skillsheet__items');
     group.items.forEach((item) => {
@@ -260,6 +257,17 @@ function timelineItem(entry) {
   content.appendChild(head);
 
   entry.roles.forEach((role) => content.appendChild(roleBlock(role)));
+
+  // entries with photos get a "view photos" trigger that opens the modal gallery
+  if (entry.images && entry.images.length) {
+    const photos = el('button', 'tl-item__photos');
+    photos.type = 'button';
+    photos.innerHTML = `<span aria-hidden="true">▣</span> View photos (${entry.images.length})`;
+    photos.setAttribute('aria-label', `View photos from ${entry.org}`);
+    photos.addEventListener('click', () => openExperienceModal(entry));
+    content.appendChild(photos);
+  }
+
   item.appendChild(content);
   return item;
 }
@@ -322,21 +330,55 @@ export function renderEducation() {
   });
 }
 
-/* ---------- Awards + certifications + languages ---------- */
+/* ---------- Beyond the code: compact awards / certs / languages ---------- */
+function badgeItem({ icon, iconAccent, name, meta, onClick }) {
+  const li = el('li', 'badge');
+  // if clickable, the inner is a real button for keyboard + screen-reader support
+  const inner = onClick ? el('button', 'badge__inner') : el('span', 'badge__inner');
+  if (onClick) {
+    inner.type = 'button';
+    li.classList.add('badge--clickable');
+    inner.addEventListener('click', onClick);
+    inner.setAttribute('aria-label', `${name} — view details`);
+  }
+
+  const ic = el('span', `badge__icon badge__icon--${iconAccent || 'blue'}`);
+  ic.setAttribute('aria-hidden', 'true');
+  ic.textContent = icon;
+
+  const body = el('span', 'badge__body');
+  const n = el('span', 'badge__name');
+  n.textContent = name;
+  body.appendChild(n);
+  if (meta) {
+    const m = el('span', 'badge__meta');
+    m.textContent = meta;
+    body.appendChild(m);
+  }
+
+  inner.append(ic, body);
+  if (onClick) {
+    const hint = el('span', 'badge__hint');
+    hint.setAttribute('aria-hidden', 'true');
+    hint.textContent = '\u2192';
+    inner.appendChild(hint);
+  }
+  li.appendChild(inner);
+  return li;
+}
+
 export function renderAwards() {
   const awardsEl = $('#awards-list');
   if (awardsEl) {
     awardsEl.innerHTML = '';
     AWARDS.forEach((a) => {
-      const card = el('div', `card award-card award-card--${a.accent}`);
-      const name = el('h3', 'award-card__name');
-      name.textContent = a.name;
-      const issuer = el('p', 'award-card__issuer');
-      issuer.textContent = a.issuer;
-      const desc = el('p', 'award-card__desc');
-      desc.textContent = a.desc;
-      card.append(name, issuer, desc);
-      awardsEl.appendChild(card);
+      awardsEl.appendChild(badgeItem({
+        icon: '\u2605', // star
+        iconAccent: a.accent,
+        name: a.name,
+        meta: a.issuer,
+        onClick: () => openInfoModal({ title: a.name, meta: a.issuer, body: a.desc, accent: a.accent }),
+      }));
     });
   }
 
@@ -344,9 +386,12 @@ export function renderAwards() {
   if (certEl) {
     certEl.innerHTML = '';
     CERTIFICATIONS.forEach((c) => {
-      const li = el('li', 'mini-item');
-      li.innerHTML = `<span class="mini-item__name">${esc(c.name)}</span><span class="mini-item__meta">${esc(c.issuer)} · ${esc(c.meta)}</span>`;
-      certEl.appendChild(li);
+      certEl.appendChild(badgeItem({
+        icon: '\u25C6', // diamond
+        iconAccent: 'pink',
+        name: c.name,
+        meta: `${c.issuer} \u00b7 ${c.meta}`,
+      }));
     });
   }
 
@@ -354,8 +399,8 @@ export function renderAwards() {
   if (langEl) {
     langEl.innerHTML = '';
     LANGUAGES.forEach((l) => {
-      const li = el('li', 'mini-item');
-      li.innerHTML = `<span class="mini-item__name">${esc(l.name)}</span><span class="mini-item__meta">${esc(l.level)}</span>`;
+      const li = el('li', 'lang-chip');
+      li.innerHTML = `${esc(l.name)} <span class="lang-chip__lvl">${esc(l.level)}</span>`;
       langEl.appendChild(li);
     });
   }
@@ -372,15 +417,116 @@ export function renderHeroTagline() {
   }
 }
 
+/* ---------- Gallery (modal only; degrades to nothing if files missing) ---------- */
+/* Returns markup for a gallery; images are hidden individually on load error,
+   and the whole block removes itself if every image fails. */
+function galleryMarkup(images, accent) {
+  if (!images || !images.length) return '';
+  const tiles = images.map((img, idx) => `
+    <figure class="gallery__item gallery__item--${accent}">
+      <button class="gallery__btn" type="button" data-full="${esc(img.src)}" data-caption="${esc(img.caption || '')}" aria-label="View larger: ${esc(img.caption || 'image')}">
+        <img class="gallery__img" src="${esc(img.src)}" alt="${esc(img.caption || '')}" loading="lazy" data-gidx="${idx}">
+      </button>
+      ${img.caption ? `<figcaption class="gallery__cap">${esc(img.caption)}</figcaption>` : ''}
+    </figure>`).join('');
+  return `<div class="gallery" data-gallery>${tiles}</div>`;
+}
+
+/* Attach error handling + lightbox after the gallery HTML is inserted. */
+function wireGallery(container) {
+  const gallery = container.querySelector('[data-gallery]');
+  if (!gallery) return;
+
+  const items = [...gallery.querySelectorAll('.gallery__item')];
+  let remaining = items.length;
+
+  items.forEach((item) => {
+    const img = item.querySelector('.gallery__img');
+    if (!img) return;
+    const markBroken = () => {
+      item.remove();
+      remaining -= 1;
+      if (remaining <= 0) gallery.remove(); // nothing loaded → remove the whole block
+    };
+    if (img.complete && img.naturalWidth === 0) {
+      markBroken();
+    } else {
+      img.addEventListener('error', markBroken);
+    }
+  });
+
+  gallery.querySelectorAll('.gallery__btn').forEach((btn) => {
+    btn.addEventListener('click', () => openLightbox(btn.dataset.full, btn.dataset.caption));
+  });
+}
+
+/* ---------- Lightbox ---------- */
+let lbLastFocused = null;
+function openLightbox(src, caption) {
+  let lb = $('#lightbox');
+  if (!lb) {
+    lb = el('div', 'lightbox');
+    lb.id = 'lightbox';
+    lb.innerHTML = `
+      <div class="lightbox__backdrop" data-lb-close></div>
+      <figure class="lightbox__panel">
+        <button class="lightbox__close" data-lb-close aria-label="Close image">×</button>
+        <img class="lightbox__img" alt="">
+        <figcaption class="lightbox__cap"></figcaption>
+      </figure>`;
+    document.body.appendChild(lb);
+    lb.querySelectorAll('[data-lb-close]').forEach((b) => b.addEventListener('click', closeLightbox));
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && lb && !lb.hidden) closeLightbox();
+    });
+  }
+  lbLastFocused = document.activeElement;
+  lb.querySelector('.lightbox__img').src = src;
+  lb.querySelector('.lightbox__img').alt = caption || '';
+  const cap = lb.querySelector('.lightbox__cap');
+  cap.textContent = caption || '';
+  cap.style.display = caption ? '' : 'none';
+  lb.hidden = false;
+  lb.querySelector('.lightbox__close').focus();
+}
+function closeLightbox() {
+  const lb = $('#lightbox');
+  if (!lb) return;
+  lb.hidden = true;
+  if (lbLastFocused && lbLastFocused.focus) lbLastFocused.focus();
+}
+
 /* ---------- Modal ---------- */
 let lastFocused = null;
 
+function showModal(html) {
+  const content = $('#modal-content');
+  content.innerHTML = html;
+  wireGallery(content);
+  const modal = $('#modal');
+  modal.hidden = false;
+  document.body.style.overflow = 'hidden';
+  $('.modal__panel').focus();
+}
+
+/* Lightweight info popup — reuses the modal shell. Used by award badges. */
+export function openInfoModal({ title, meta, body, accent }) {
+  lastFocused = document.activeElement;
+  const parts = [];
+  parts.push(`<h2 id="modal-title">${esc(title)}</h2>`);
+  if (meta) parts.push(`<p class="modal__eyebrow modal__eyebrow--${accent || 'blue'}">${esc(meta)}</p>`);
+  if (body) parts.push(`<p>${esc(body)}</p>`);
+  showModal(parts.join(''));
+}
+
 export function openModal(p) {
   lastFocused = document.activeElement;
-  const content = $('#modal-content');
   const parts = [];
   parts.push(`<h2 id="modal-title">${esc(p.name)}</h2>`);
   if (p.subtitle) parts.push(`<p class="proj__summary"><em>${esc(p.subtitle)}</em></p>`);
+
+  // gallery sits right under the title
+  parts.push(galleryMarkup(p.images, p.accent));
 
   parts.push('<div class="pill-row">');
   p.tags.forEach((t) => parts.push(`<span class="pill pill--${p.accent}">${esc(t)}</span>`));
@@ -412,11 +558,28 @@ export function openModal(p) {
     parts.push('</div>');
   }
 
-  content.innerHTML = parts.join('');
-  const modal = $('#modal');
-  modal.hidden = false;
-  document.body.style.overflow = 'hidden';
-  $('.modal__panel').focus();
+  showModal(parts.join(''));
+}
+
+/* Experience modal — reuses the same modal + gallery for org entries. */
+export function openExperienceModal(entry) {
+  lastFocused = document.activeElement;
+  const parts = [];
+  parts.push(`<h2 id="modal-title">${esc(entry.org)}</h2>`);
+  parts.push(galleryMarkup(entry.images, entry.accent));
+
+  entry.roles.forEach((role) => {
+    parts.push(`<h3>${esc(role.title)}</h3>`);
+    parts.push(`<p class="flagship__meta">${esc(role.meta)}</p>`);
+    if (role.summary) parts.push(`<p><em>${esc(role.summary)}</em></p>`);
+    if (role.points && role.points.length) {
+      parts.push('<ul>');
+      role.points.forEach((pt) => parts.push(`<li>${esc(pt)}</li>`));
+      parts.push('</ul>');
+    }
+  });
+
+  showModal(parts.join(''));
 }
 
 export function closeModal() {

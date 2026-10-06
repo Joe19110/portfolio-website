@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Joelliane Anggra — Computer Science × Software Engineering</title>
   <meta name="description" content="Portfolio of Joelliane Anggra — backend systems, data engineering, and AI tooling. Third-year Computer Science × Software Engineering student.">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
@@ -38,9 +40,9 @@
       </button>
       <ul class="nav__links" id="nav-links">
         <li><a href="#top">Home</a></li>
+        <li><a href="#about">About</a></li>
         <li><a href="#work">Work</a></li>
         <li><a href="#experience">Experience</a></li>
-        <li><a href="#about">About</a></li>
         <li><a href="#skills">Skills</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
@@ -58,7 +60,7 @@
             <h1 class="hero__headline" id="hero-headline">
               <span class="highlight">I build</span> backend systems, data pipelines, and the AI tooling on top.
             </h1>
-            <p class="hero__support">Currently building data engineering and AI tooling in the BINUS IT Division.</p>
+            <p class="hero__support">Always open to new opportunities in backend, data, and AI engineering.</p>
             <div class="hero__cta">
               <a class="btn btn--pink" href="#work">
                 <span class="status-dot" aria-hidden="true"></span> View my work
@@ -76,7 +78,7 @@
               </div>
               <div class="terminal__body" id="terminal-body">
                 <!-- intro line (typewriter) -->
-                <p class="terminal__line"><span class="terminal__prompt">joelliane@portfolio:~$</span> <span id="typed"></span><span class="terminal__caret" id="intro-caret" aria-hidden="true"></span></p>
+                <p class="terminal__line" id="intro-line"><span class="terminal__prompt">joelliane@portfolio:~$</span> <span id="typed"></span><span class="terminal__caret" id="intro-caret" aria-hidden="true"></span></p>
                 <div class="terminal__out" id="terminal-out"></div>
                 <!-- live log of entered commands + responses -->
                 <div class="terminal__log" id="terminal-log"></div>
@@ -166,13 +168,26 @@
               <div class="flagship__head">
                 <p class="flagship__meta"><strong>Role:</strong> Associate Member Data Engineer, BINUS IT Division</p>
                 <p class="flagship__meta"><strong>Type:</strong> Internal tool, in active rollout — the full data engineering team is migrating onto it as their primary workflow tool.</p>
-                <h3 class="h3" style="margin-top:18px">Overview</h3>
-                <p>An internal platform centralizing the data engineering team's workflow — pipeline failures, data quality issues, access requests, schema changes, source onboarding — replacing ad-hoc ticket handling with one system. It includes an AI chatbot with tool access to live pipeline infrastructure.</p>
               </div>
 
-              <div class="flagship__cols">
-                <div>
-                  <h3 class="h3">What I built</h3>
+              <!-- Sub-tabs -->
+              <div class="tabs" id="desa-tabs">
+                <div class="tabs__list" role="tablist" aria-label="DESA case study sections">
+                  <button class="tabs__tab" role="tab" id="desatab-overview" aria-controls="desapanel-overview" aria-selected="true">Overview</button>
+                  <button class="tabs__tab" role="tab" id="desatab-built" aria-controls="desapanel-built" aria-selected="false" tabindex="-1">What I built</button>
+                  <button class="tabs__tab" role="tab" id="desatab-arch" aria-controls="desapanel-arch" aria-selected="false" tabindex="-1">Architecture</button>
+                  <button class="tabs__tab" role="tab" id="desatab-links" aria-controls="desapanel-links" aria-selected="false" tabindex="-1">Links</button>
+                </div>
+
+                <!-- Overview -->
+                <div class="tabs__panel" role="tabpanel" id="desapanel-overview" aria-labelledby="desatab-overview" tabindex="0">
+                  <p>An internal platform centralizing the data engineering team's workflow — pipeline failures, data quality issues, access requests, schema changes, source onboarding — replacing ad-hoc ticket handling with one system. It includes an AI chatbot with tool access to live pipeline infrastructure.</p>
+                  <h3 class="h3">Stack</h3>
+                  <div class="pill-row" id="desa-stack"></div>
+                </div>
+
+                <!-- What I built -->
+                <div class="tabs__panel" role="tabpanel" id="desapanel-built" aria-labelledby="desatab-built" tabindex="0" hidden>
                   <ul class="checklist">
                     <li>Built a data sanitization step and, downstream of it, an error classifier for automated error detection within Delman pipelines.</li>
                     <li>Linked the error-classification pipeline to Langfuse for tracing and observability.</li>
@@ -182,59 +197,63 @@
                     <li>Built the FastAPI backend tying these pieces together, with MCP giving the chatbot direct tool access to Delman pipeline operations.</li>
                     <li>Used Docker for containerized execution and n8n for workflow automation.</li>
                   </ul>
-                  <h3 class="h3">Stack</h3>
-                  <div class="pill-row" id="desa-stack"></div>
                 </div>
 
-                <div>
-                  <h3 class="h3">Architecture</h3>
-                  <div class="arch__panel">
-                    <div class="arch" role="img" aria-label="Architecture: Delman pipeline feeds a sanitization step, then an error classifier traced in Langfuse. A FastAPI backend connects a RAG system evaluated with RAGAS, RustFS archive storage, and an AI chatbot that reaches Delman operations through MCP tools.">
-                      <div class="arch__row">
+                <!-- Architecture -->
+                <div class="tabs__panel" role="tabpanel" id="desapanel-arch" aria-labelledby="desatab-arch" tabindex="0" hidden>
+                  <div class="arch arch--wide" role="img" aria-label="Architecture. Error pipeline: Delman pipelines feed a sanitization step, then an error classifier, with the run traced in Langfuse. A FastAPI backend is the central hub connecting three services: a RAG system evaluated with RAGAS, RustFS archive storage, and an AI chatbot that reaches Delman operations through MCP tools.">
+                    <!-- Stage 1: error-detection pipeline -->
+                    <div class="arch__stage">
+                      <p class="arch__label">Error-detection pipeline</p>
+                      <div class="arch__flow">
                         <div class="arch__node arch__node--blue">Delman pipelines</div>
-                        <span class="arch__arrow">→</span>
+                        <span class="arch__arrow" aria-hidden="true">→</span>
                         <div class="arch__node arch__node--pink">Sanitization</div>
-                        <span class="arch__arrow">→</span>
+                        <span class="arch__arrow" aria-hidden="true">→</span>
                         <div class="arch__node arch__node--pink">Error classifier</div>
+                        <span class="arch__arrow" aria-hidden="true">→</span>
+                        <div class="arch__node arch__node--sand">Langfuse tracing</div>
                       </div>
-                      <div class="arch__row">
-                        <span class="arch__arrow">↳</span>
-                        <div class="arch__node arch__node--sand">Langfuse (tracing)</div>
-                      </div>
-                      <div class="arch__row">
-                        <div class="arch__node arch__node--blue">FastAPI backend</div>
-                        <span class="arch__arrow">↔</span>
-                        <div class="arch__node arch__node--pink">RAG system</div>
-                        <span class="arch__arrow">→</span>
-                        <div class="arch__node arch__node--sand">RAGAS eval</div>
-                      </div>
-                      <div class="arch__row">
-                        <div class="arch__node arch__node--blue">FastAPI backend</div>
-                        <span class="arch__arrow">↔</span>
-                        <div class="arch__node arch__node--sand">RustFS (archive)</div>
-                      </div>
-                      <div class="arch__row">
-                        <div class="arch__node arch__node--pink">AI chatbot</div>
-                        <span class="arch__arrow">→</span>
-                        <div class="arch__node arch__node--sand">MCP tools</div>
-                        <span class="arch__arrow">→</span>
-                        <div class="arch__node arch__node--blue">Delman ops</div>
+                    </div>
+
+                    <span class="arch__connector" aria-hidden="true"></span>
+
+                    <!-- Stage 2: FastAPI hub + its services -->
+                    <div class="arch__stage">
+                      <p class="arch__label">Backend &amp; services</p>
+                      <div class="arch__hub arch__node--blue">FastAPI backend</div>
+                      <div class="arch__branches">
+                        <div class="arch__branch">
+                          <div class="arch__node arch__node--pink">RAG system</div>
+                          <span class="arch__arrow arch__arrow--down" aria-hidden="true">↓</span>
+                          <div class="arch__node arch__node--sand">RAGAS eval</div>
+                        </div>
+                        <div class="arch__branch">
+                          <div class="arch__node arch__node--sand">RustFS archive</div>
+                        </div>
+                        <div class="arch__branch">
+                          <div class="arch__node arch__node--pink">AI chatbot</div>
+                          <span class="arch__arrow arch__arrow--down" aria-hidden="true">↓</span>
+                          <div class="arch__node arch__node--sand">MCP tools</div>
+                          <span class="arch__arrow arch__arrow--down" aria-hidden="true">↓</span>
+                          <div class="arch__node arch__node--blue">Delman ops</div>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
 
-              <div class="flagship__links-block">
-                <h3 class="h3">Links</h3>
-                <div class="callout">Internal tool; code not public due to confidentiality. Demo video below.</div>
-                <ul class="desa-artifacts">
-                  <li>A screen-recorded demo video (e.g. the error classifier catching a bad pipeline run, or the chatbot executing a command/skill).</li>
-                  <li>A simplified architecture diagram with no internal URLs, server names, or proprietary logic (above).</li>
-                  <li>The chatbot's system prompt and command/skill definitions, with a note on guardrails.</li>
-                  <li>The MCP tool schema exposed to the model, with parameter descriptions.</li>
-                  <li>A short explanation of the sanitization → classification pipeline logic.</li>
-                </ul>
+                <!-- Links -->
+                <div class="tabs__panel" role="tabpanel" id="desapanel-links" aria-labelledby="desatab-links" tabindex="0" hidden>
+                  <div class="callout">Internal tool; code not public due to confidentiality. Demo video below.</div>
+                  <ul class="desa-artifacts">
+                    <li>A screen-recorded demo video (e.g. the error classifier catching a bad pipeline run, or the chatbot executing a command/skill).</li>
+                    <li>A simplified architecture diagram with no internal URLs, server names, or proprietary logic (see the Architecture tab).</li>
+                    <li>The chatbot's system prompt and command/skill definitions, with a note on guardrails.</li>
+                    <li>The MCP tool schema exposed to the model, with parameter descriptions.</li>
+                    <li>A short explanation of the sanitization → classification pipeline logic.</li>
+                  </ul>
+                </div>
               </div>
             </div>
           </div>
@@ -249,7 +268,7 @@
           <div class="layout__rail">
             <p class="eyebrow">Work</p>
             <h2 class="section__title">Full project archive</h2>
-            <p class="section__lead">Every project is equally reachable here, no matter which link brought you in.</p>
+            <p class="section__lead">The full set of things I've built, in one place.</p>
           </div>
           <div class="layout__body">
             <div class="grid grid--work" id="work-grid"></div>
@@ -287,7 +306,7 @@
         <header class="section-head">
           <p class="eyebrow">Skills</p>
           <h2 class="section__title">Tools I reach for</h2>
-          <p class="section__lead">Grouped by what they're for — the top group shifts with how you got here.</p>
+          <p class="section__lead">Grouped by what they're for.</p>
         </header>
         <dl class="skillsheet" id="skills-sheet"></dl>
       </div>
@@ -305,25 +324,28 @@
       </div>
     </section>
 
-    <!-- AWARDS — one hero award + a compact sidebar of certs/languages -->
-    <section class="section" id="awards">
+    <!-- AWARDS — compact single band: awards, certs, languages as tight rows -->
+    <section class="section section--tight" id="awards">
       <div class="container">
-        <header class="section-head">
-          <p class="eyebrow">Awards &amp; recognition</p>
-          <h2 class="section__title">Beyond the code</h2>
-        </header>
-        <div class="awards-layout">
-          <div class="awards-main" id="awards-list"></div>
-          <aside class="awards-side">
-            <div class="awards-side__block">
-              <h3 class="awards-side__title">Certifications</h3>
-              <ul class="mini-list" id="cert-list"></ul>
+        <div class="beyond">
+          <div class="beyond__head">
+            <p class="eyebrow">Beyond the code</p>
+            <p class="beyond__note">Awards, certifications &amp; languages.</p>
+          </div>
+          <div class="beyond__cols">
+            <div class="beyond__group">
+              <h3 class="beyond__label">Awards</h3>
+              <ul class="badge-list" id="awards-list"></ul>
             </div>
-            <div class="awards-side__block">
-              <h3 class="awards-side__title">Languages</h3>
-              <ul class="mini-list" id="lang-list"></ul>
+            <div class="beyond__group">
+              <h3 class="beyond__label">Certifications</h3>
+              <ul class="badge-list" id="cert-list"></ul>
             </div>
-          </aside>
+            <div class="beyond__group">
+              <h3 class="beyond__label">Languages</h3>
+              <ul class="lang-run" id="lang-list"></ul>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -337,7 +359,7 @@
           <p class="contact-cta__lead">Interested in working together, discussing a project, or just talking tech?</p>
           <a class="contact-cta__email" href="mailto:joelliane@gmail.com">joelliane@gmail.com</a>
           <div class="contact-cta__links">
-            <a href="tel:+6285920765585">+62 859 2076 5585</a>
+            <a href="https://wa.me/6285920765585" target="_blank" rel="noopener">+62 859 2076 5585</a>
             <span class="contact-cta__sep" aria-hidden="true">·</span>
             <a href="https://linkedin.com/in/joelliane-anggra" target="_blank" rel="noopener">LinkedIn</a>
             <span class="contact-cta__sep" aria-hidden="true">·</span>
@@ -350,7 +372,7 @@
 
   <footer class="footer">
     <div class="container">
-      <p>Built with curiosity, caffeine, and questionable amounts of debugging.</p>
+      <p>Built with curiosity, matcha, and a good dose of personality.</p>
       <p class="footer__meta">© <span id="year"></span> Joelliane Anggra</p>
     </div>
   </footer>

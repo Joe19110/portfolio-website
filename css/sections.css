@@ -14,7 +14,7 @@
 .hero__inner {
   max-width: var(--maxw);
   margin: 0 auto;
-  padding: clamp(48px, 7vw, 84px) 28px clamp(56px, 7vw, 88px);
+  padding: clamp(24px, 3.5vw, 42px) 28px clamp(56px, 7vw, 88px);
 }
 .hero__eyebrow {
   font-size: 13px;
@@ -106,20 +106,46 @@
   background-color: var(--bg);
 }
 .flagship__meta { margin: 6px 0; color: #4b473f; font-size: 15px; }
-.flagship__head { margin-bottom: 24px; }
-
-/* two-column body: "what I built" list beside the architecture diagram */
-.flagship__cols {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: clamp(24px, 3.5vw, 44px);
-  align-items: start;
-}
-@media (max-width: 820px) {
-  .flagship__cols { grid-template-columns: 1fr; }
-}
+.flagship__head { margin-bottom: 20px; }
 .h3 { font-size: 18px; margin: 0 0 10px; }
-.flagship__cols .h3:not(:first-child) { margin-top: 26px; }
+
+/* ---------- Flagship sub-tabs ---------- */
+.tabs__list {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 20px;
+}
+.tabs__tab {
+  font: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--muted);
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  padding: 10px 14px;
+  margin-bottom: -1px;
+  cursor: pointer;
+  border-radius: 8px 8px 0 0;
+  transition: color 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+}
+.tabs__tab:hover { color: var(--ink); background: var(--sand); }
+.tabs__tab[aria-selected="true"] {
+  color: var(--pink-ink);
+  border-bottom-color: var(--pink);
+}
+.tabs__panel { animation: tab-fade 0.2s ease; }
+.tabs__panel[hidden] { display: none; }
+.tabs__panel .h3:first-child { margin-top: 18px; }
+@keyframes tab-fade {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .tabs__panel { animation: none; }
+}
 
 .checklist { list-style: none; padding: 0; margin: 0; }
 .checklist li {
@@ -148,30 +174,143 @@
 .desa-artifacts li { margin-bottom: 8px; }
 .flagship__links-block { margin-top: 26px; }
 
-/* Architecture diagram — vertical flow reads well in a side column */
-.arch { display: flex; flex-direction: column; gap: 10px; margin: 0; }
-.arch__row {
+/* ---------- Architecture diagram ----------
+   Structured top-to-bottom: a horizontal error-detection pipeline,
+   then a FastAPI hub fanning out to three service branches.
+   Nodes never wrap raggedly — the pipeline row scrolls if too narrow. */
+.arch {
+  background: var(--sand);
+  border-radius: 14px;
+  padding: clamp(20px, 3vw, 32px);
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 10px;
-  flex-wrap: wrap;
+  gap: 0;
+  max-width: 100%;
+}
+/* full-width variant: diagram has room, so content can center with no scroll */
+.arch--wide .arch__flow { justify-content: center; flex-wrap: wrap; overflow-x: visible; }
+.arch--wide .arch__branches { max-width: 760px; margin-left: auto; margin-right: auto; }
+.arch__stage { width: 100%; min-width: 0; }
+.arch__label {
+  font-size: 11px;
+  color: var(--muted-soft);
+  text-align: center;
+  margin: 0 0 12px;
+  letter-spacing: 0.03em;
 }
 .arch__node {
   border-radius: 10px;
-  padding: 10px 14px;
+  padding: 9px 14px;
   font-size: 13px;
+  line-height: 1.25;
   border: 1px solid var(--line);
   background: #fff;
+  text-align: center;
+  white-space: nowrap;
 }
 .arch__node--blue { background: var(--blue); color: var(--blue-ink); border-color: transparent; }
 .arch__node--pink { background: var(--pink); color: var(--pink-ink); border-color: transparent; }
 .arch__node--mint { background: var(--mint); color: var(--mint-ink); border-color: transparent; }
-.arch__node--sand { background: var(--sand); }
-.arch__arrow { color: var(--muted-soft); font-size: 16px; }
-.arch__panel {
-  background: var(--sand);
-  border-radius: 14px;
-  padding: 18px;
+.arch__node--sand { background: var(--bg); }
+
+.arch__arrow { color: var(--muted-soft); font-size: 15px; flex: 0 0 auto; }
+.arch__arrow--down { font-size: 14px; }
+
+/* horizontal pipeline — scrolls rather than wraps when space is tight */
+.arch__flow {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+.arch__flow .arch__node { flex: 0 0 auto; }
+
+/* vertical connector between the two stages */
+.arch__connector {
+  width: 2px;
+  height: 24px;
+  background: var(--muted-soft);
+  opacity: 0.4;
+  margin: 6px 0;
+}
+
+/* FastAPI hub, centered above its branches */
+.arch__hub {
+  display: block;
+  width: fit-content;
+  margin: 0 auto 4px;
+  border-radius: 10px;
+  padding: 10px 18px;
+  font-size: 13px;
+  font-weight: 500;
+  text-align: center;
+}
+
+/* three service branches fanning out below the hub */
+.arch__branches {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: 14px;
+  position: relative;
+}
+/* a connecting line from the hub down to the branch row */
+.arch__branches::before {
+  content: "";
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  width: 2px;
+  height: 14px;
+  background: var(--muted-soft);
+  opacity: 0.4;
+}
+.arch__branch {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 12px 8px;
+  background: var(--bg);
+  border-radius: 10px;
+  border: 1px solid var(--line);
+}
+.arch__branch .arch__node { width: 100%; }
+
+/* ---------- Phone: lay the whole diagram out vertically ---------- */
+@media (max-width: 560px) {
+  .arch { padding: 18px 14px; }
+
+  /* pipeline flows top-to-bottom instead of scrolling sideways */
+  .arch__flow,
+  .arch--wide .arch__flow {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 6px;
+    overflow-x: visible;
+    flex-wrap: nowrap;
+  }
+  .arch__flow .arch__node {
+    width: 100%;
+    white-space: normal; /* allow longer labels to wrap on small screens */
+  }
+  /* rotate the horizontal arrows to point downward */
+  .arch__flow .arch__arrow { transform: rotate(90deg); font-size: 14px; align-self: center; }
+
+  /* branches stack into one column */
+  .arch__branches,
+  .arch--wide .arch__branches {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  .arch__branches::before { display: none; }
+
+  /* nodes can wrap their text now that width is constrained */
+  .arch__node { white-space: normal; }
+  .arch__hub { width: 100%; }
 }
 
 /* ---------- Skills ---------- */
@@ -190,7 +329,6 @@
   border-top: 1px solid var(--line);
 }
 .skillsheet__row:last-child { border-bottom: 1px solid var(--line); }
-.skillsheet__row.is-lead { background: linear-gradient(90deg, rgba(244,192,209,0.14), transparent 60%); }
 .skillsheet__label {
   font-family: var(--font-display);
   font-weight: 600;
@@ -200,15 +338,6 @@
   align-items: center;
   gap: 8px;
   flex-wrap: wrap;
-}
-.skillsheet__leadtag {
-  font-family: var(--font-body);
-  font-weight: 500;
-  font-size: 10px;
-  color: var(--pink-ink);
-  background: var(--pink);
-  padding: 2px 7px;
-  border-radius: 999px;
 }
 .skillsheet__items {
   margin: 0;
@@ -321,6 +450,23 @@
 .tl-item__logo--blue.is-fallback { background: var(--blue); color: var(--blue-ink); }
 .tl-item__logo--pink.is-fallback { background: var(--pink); color: var(--pink-ink); }
 .tl-item__logo--mint.is-fallback { background: var(--mint); color: var(--mint-ink); }
+
+/* "view photos" trigger on timeline entries with images */
+.tl-item__photos {
+  margin-top: 12px;
+  font: inherit;
+  font-size: 13px;
+  color: var(--blue-ink);
+  background: none;
+  border: none;
+  padding: 4px 0;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.tl-item__photos span { font-size: 12px; }
+.tl-item__photos:hover { text-decoration: underline; }
 
 /* each role within an org */
 .tl-role {
@@ -445,68 +591,114 @@
 }
 
 /* ---------- Awards: one hero award + a compact sidebar ---------- */
-.awards-layout {
-  display: grid;
-  grid-template-columns: 1.6fr 1fr;
-  gap: clamp(24px, 4vw, 48px);
-  align-items: start;
-}
-.awards-main { display: flex; flex-direction: column; gap: 18px; }
-.award-card {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  background: var(--sand);
-  border-radius: var(--radius);
-  padding: 22px;
-}
-/* the first award reads as the hero */
-.award-card:first-child {
-  background: var(--bg);
+/* ---------- Beyond the code: compact single band ---------- */
+.section--tight { padding: clamp(40px, 5vw, 64px) 0; }
+.beyond {
   border: 1px solid var(--line);
-  padding: 28px;
-}
-.award-card:first-child .award-card__name { font-size: 22px; }
-.award-card--pink { box-shadow: inset 0 4px 0 var(--pink); }
-.award-card--blue { box-shadow: inset 0 4px 0 var(--blue); }
-.award-card--mint { box-shadow: inset 0 4px 0 var(--mint); }
-.award-card__name { font-size: 16px; margin: 0; line-height: 1.2; }
-.award-card__issuer { font-size: 12.5px; color: var(--muted-soft); margin: 0; }
-.award-card__desc { font-size: 14px; color: var(--body-ink); margin: 6px 0 0; }
-
-.awards-side {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-  padding: 22px;
-  background: var(--sand);
   border-radius: var(--radius);
-  position: sticky;
-  top: 96px;
+  padding: clamp(22px, 3vw, 32px);
+  background: var(--bg);
 }
-.awards-side__title {
-  font-size: 13px;
-  color: var(--muted-soft);
-  margin: 0 0 8px;
-  letter-spacing: 0.02em;
-}
-.mini-list { list-style: none; margin: 0; padding: 0; }
-.mini-item {
+.beyond__head {
   display: flex;
-  justify-content: space-between;
   align-items: baseline;
   gap: 12px;
-  padding: 9px 0;
-  border-top: 1px solid var(--line);
+  flex-wrap: wrap;
+  margin-bottom: 22px;
 }
-.mini-item:first-child { border-top: none; }
-.mini-item__name { font-weight: 500; font-size: 14px; }
-.mini-item__meta { font-size: 12.5px; color: var(--muted-soft); text-align: right; }
+.beyond__head .eyebrow {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 18px;
+  color: var(--ink);
+  margin: 0;
+}
+.beyond__note { font-size: 13px; color: var(--muted-soft); margin: 0; }
 
-@media (max-width: 820px) {
-  .awards-layout { grid-template-columns: 1fr; }
-  .awards-side { position: static; }
+.beyond__cols {
+  display: grid;
+  grid-template-columns: 1.4fr 1.4fr 1fr;
+  gap: clamp(20px, 3vw, 40px);
 }
+@media (max-width: 760px) {
+  .beyond__cols { grid-template-columns: 1fr; gap: 24px; }
+}
+.beyond__label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted-soft);
+  margin: 0 0 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--line);
+}
+
+/* badge rows (awards + certs) */
+.badge-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px; }
+.badge { display: block; }
+.badge__inner {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  width: 100%;
+  text-align: left;
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+  padding: 0;
+}
+/* clickable awards: button affordance + hover */
+.badge--clickable .badge__inner {
+  cursor: pointer;
+  border-radius: 10px;
+  margin: -6px -8px;
+  padding: 6px 8px;
+  transition: background 0.15s ease;
+}
+.badge--clickable .badge__inner:hover { background: var(--sand); }
+.badge__hint {
+  margin-left: auto;
+  align-self: center;
+  color: var(--muted-soft);
+  font-size: 14px;
+  opacity: 0;
+  transform: translateX(-4px);
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+.badge--clickable .badge__inner:hover .badge__hint,
+.badge--clickable .badge__inner:focus-visible .badge__hint {
+  opacity: 1;
+  transform: translateX(0);
+}
+@media (prefers-reduced-motion: reduce) {
+  .badge__hint { transition: none; }
+}
+.badge__icon {
+  flex: 0 0 auto;
+  width: 26px; height: 26px;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+}
+.badge__icon--blue { background: var(--blue); color: var(--blue-ink); }
+.badge__icon--pink { background: var(--pink); color: var(--pink-ink); }
+.badge__icon--mint { background: var(--mint); color: var(--mint-ink); }
+.badge__body { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
+.badge__name { font-size: 14px; font-weight: 500; line-height: 1.3; }
+.badge__meta { font-size: 12px; color: var(--muted-soft); }
+
+/* language chips */
+.lang-run { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.lang-chip {
+  font-size: 13px;
+  background: var(--sand);
+  border-radius: 999px;
+  padding: 5px 12px;
+}
+.lang-chip__lvl { color: var(--muted-soft); font-size: 11px; }
 
 /* ---------- Contact: centered call-to-action band ---------- */
 .section--contact { background: var(--sand); }

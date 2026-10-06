@@ -20,6 +20,10 @@
       "Shipped 5+ pages across 2 deployed platforms; contributed frontend/animations for KartiniLove.ai; worked with Strapi for blog/content."
     ],
     "stack": ["Next.js", "React", "TypeScript", "Tailwind CSS", "Laravel (PHP)", "PostgreSQL", "RAG", "Strapi"],
+    "images": [
+      { "src": "assets/projects/privasimu-dpia.png", "caption": "DPIA Insight — risk heatmap view" },
+      { "src": "assets/projects/privasimu-ropa.png", "caption": "ROPA interface" }
+    ],
     "links": [
       { "label": "Live — privasimu.com", "url": "https://privasimu.com" },
       { "label": "Demo video", "url": "https://youtu.be/b3HoGm2rBAo" },
@@ -46,6 +50,10 @@
       "Documented methodology and findings in a research paper."
     ],
     "stack": ["Python", "pandas", "statsmodels", "Prophet", "XGBoost"],
+    "images": [
+      { "src": "assets/projects/gender-income-mase.png", "caption": "MASE comparison across seven models" },
+      { "src": "assets/projects/gender-income-forecast.png", "caption": "2024–2026 projections" }
+    ],
     "links": []
   },
   {
@@ -70,6 +78,10 @@
       "What went wrong: the deployed server went down at one point — a real lesson about the gap between a working local build and a maintained deployed service."
     ],
     "stack": ["React", "Vite", "Tailwind CSS", "Redux", "Node.js", "Express.js", "MongoDB", "JWT", "Cloudinary", "Swagger", "Docker", "Gemini", "Vercel"],
+    "images": [
+      { "src": "assets/projects/kitchen-serve-portal.png", "caption": "Staff portal" },
+      { "src": "assets/projects/kitchen-serve-chat.png", "caption": "In-app chat + AI chatbot" }
+    ],
     "links": [
       { "label": "Live — kitchen-serve-frontend.vercel.app", "url": "https://kitchen-serve-frontend.vercel.app" },
       { "label": "GitHub", "url": "https://github.com/Joe19110/KitchenServe" },
@@ -98,6 +110,10 @@
       "Real-time state via Zustand with secure live sessions in Firestore."
     ],
     "stack": ["React Native", "Expo", "Firebase", "Zustand"],
+    "images": [
+      { "src": "assets/projects/cuanin-task.png", "caption": "Task lifecycle screen" },
+      { "src": "assets/projects/cuanin-escrow.png", "caption": "Escrow payment flow" }
+    ],
     "links": [
       { "label": "GitHub", "url": "https://github.com/dreamsdagger/cuanin" },
       { "label": "APK release", "url": "https://github.com/dreamsdagger/cuanin/releases/tag/v1.0.0" }
@@ -121,6 +137,10 @@
       "Improved stored data from text-based to structured JSON — easier to parse, update, sync, and reuse."
     ],
     "stack": ["React Native", "Expo", "SQLite", "Zustand"],
+    "images": [
+      { "src": "assets/projects/stemm-lab-home.png", "caption": "Activity home screen" },
+      { "src": "assets/projects/stemm-lab-activity.png", "caption": "Sensor-based activity" }
+    ],
     "links": [
       { "label": "GitHub", "url": "https://github.com/waengs/StemmLab" },
       { "label": "APK release", "url": "https://github.com/waengs/StemmLab/releases/tag/v1.0.0" },
@@ -161,6 +181,10 @@
       "Optimized the game loop for browser play via Pygbag."
     ],
     "stack": ["Python", "Pygame", "Pymunk", "Pygbag", "JSON"],
+    "images": [
+      { "src": "assets/projects/catch-n-collect-game.png", "caption": "Claw machine gameplay" },
+      { "src": "assets/projects/catch-n-collect-stickerbook.png", "caption": "Digital stickerbook" }
+    ],
     "links": [
       { "label": "GitHub", "url": "https://github.com/Joe19110/CatchnCollect" },
       { "label": "Live — itch.io", "url": "https://joe19110.itch.io/catch-n-collect" },
