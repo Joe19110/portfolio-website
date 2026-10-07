@@ -230,8 +230,16 @@
   line-height: 1.6;
   max-height: 340px;
   overflow-y: auto;
+  overflow-x: hidden;
+  max-width: 100%;
   cursor: text;
 }
+/* every line must wrap and never push the terminal wider than its box */
+.terminal__body p,
+.terminal__line,
+.terminal__resp,
+.terminal__out,
+.terminal__log { overflow-wrap: anywhere; word-break: break-word; min-width: 0; }
 .terminal__body p { margin: 0 0 2px; }
 .terminal__prompt { color: #7fd1a6; }
 .terminal__caret {
