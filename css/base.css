@@ -47,6 +47,7 @@ body {
   font-size: 16px;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden; /* safety net against stray horizontal overflow / shift */
 }
 
 h1, h2, h3 {

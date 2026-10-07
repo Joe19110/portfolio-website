@@ -68,6 +68,12 @@
 /* wider minimums so cards fill the roomier content column */
 .grid--featured { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
 .grid--work     { grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); }
+/* on narrow phones the fixed minmax minimums (260/300px) exceed the
+   viewport and overflow — collapse to a single flexible column */
+@media (max-width: 560px) {
+  .grid--featured,
+  .grid--work { grid-template-columns: 1fr; }
+}
 
 /* ---------- Footer ---------- */
 .footer {
