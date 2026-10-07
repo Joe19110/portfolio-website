@@ -30,7 +30,7 @@
   gap: clamp(32px, 5vw, 56px);
   align-items: center;
 }
-.hero__col { position: relative; }
+.hero__col { position: relative; min-width: 0; } /* allow the terminal cell to shrink, not overflow */
 .hero .sticker { margin-bottom: 18px; }
 
 .hero__headline {
@@ -45,7 +45,12 @@
   max-width: 48ch;
   margin: 0 0 30px;
 }
-.hero__cta { display: flex; gap: 14px; flex-wrap: wrap; }
+/* keep both CTAs on one line; only wrap on very small screens */
+.hero__cta { display: flex; gap: 12px; flex-wrap: nowrap; }
+.hero__cta .btn { white-space: nowrap; padding: 11px 18px; }
+@media (max-width: 380px) {
+  .hero__cta { flex-wrap: wrap; }
+}
 
 /* ---------- Featured ---------- */
 .featured__more { margin-top: 26px; }
