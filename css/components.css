@@ -187,6 +187,12 @@
   background: var(--mint);
   color: var(--mint-ink);
 }
+.proj__spark {
+  flex: 0 0 auto;
+  color: var(--ink);
+  font-size: 24px;
+  line-height: 1;
+}
 .proj__summary { font-size: 14px; color: #5a564d; margin: 0; }
 .proj__tech { display: flex; flex-wrap: wrap; gap: 5px; }
 .proj__link { font-size: 13px; color: var(--blue-ink); font-weight: 500; margin-top: auto; }
@@ -292,6 +298,15 @@
   animation: marquee 18s linear infinite;
 }
 .marquee__track span { padding: 0 10px; }
+.marquee__star {
+  display: inline-flex;
+  align-items: center;
+  vertical-align: middle;
+  padding: 0;
+  margin: 0 2px 0 12px;
+  line-height: 1;
+  font-size: 9px;
+}
 
 /* ---------- Modal ---------- */
 .modal { position: fixed; inset: 0; z-index: 300; display: flex; }
@@ -386,7 +401,7 @@
   width: 100%;
   padding: 0;
   border: none;
-  background: none;
+  background: var(--sand);
   cursor: zoom-in;
   border-radius: 12px;
   overflow: hidden;
@@ -397,13 +412,22 @@
 .gallery__item--mint .gallery__btn { box-shadow: inset 0 3px 0 var(--mint); }
 .gallery__img {
   width: 100%;
-  aspect-ratio: 4 / 3;
-  object-fit: cover;
+  height: 100%;
+  /* shrink to fit the tile, keep aspect ratio, no cropping */
+  object-fit: contain;
   display: block;
-  background: var(--sand);
+  background: transparent;
+  padding: 8px;
   transition: transform 0.2s ease;
 }
 .gallery__btn:hover .gallery__img { transform: scale(1.03); }
+
+/* per-gallery tile shape (set from each project's `aspect`) */
+.gallery--landscape .gallery__btn { aspect-ratio: 16 / 10; }
+.gallery--portrait  .gallery__btn { aspect-ratio: 3 / 4; }
+.gallery--square    .gallery__btn { aspect-ratio: 1 / 1; }
+/* portrait tiles are tall, so give them a narrower column */
+.gallery--portrait { grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); }
 .gallery__cap {
   font-size: 12px;
   color: var(--muted-soft);

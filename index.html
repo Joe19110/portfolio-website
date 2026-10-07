@@ -154,14 +154,14 @@
       <div class="container">
         <div class="layout">
           <div class="layout__rail">
-            <p class="eyebrow">Flagship project</p>
+            <p class="eyebrow">Highlighted project</p>
             <h2 class="section__title">BINUS EDM DESA</h2>
             <div class="pill-row">
               <span class="pill pill--blue">Backend</span>
               <span class="pill pill--pink">Data Engineering</span>
               <span class="pill pill--pink">AI Engineering</span>
             </div>
-            <p class="section__lead">The deepest, most current work — at the intersection of all three focus areas.</p>
+            <p class="section__lead">My deepest, most current work at the intersection of all three focus areas.</p>
           </div>
           <div class="layout__body">
             <div class="flagship">
@@ -176,7 +176,7 @@
                   <button class="tabs__tab" role="tab" id="desatab-overview" aria-controls="desapanel-overview" aria-selected="true">Overview</button>
                   <button class="tabs__tab" role="tab" id="desatab-built" aria-controls="desapanel-built" aria-selected="false" tabindex="-1">What I built</button>
                   <button class="tabs__tab" role="tab" id="desatab-arch" aria-controls="desapanel-arch" aria-selected="false" tabindex="-1">Architecture</button>
-                  <button class="tabs__tab" role="tab" id="desatab-links" aria-controls="desapanel-links" aria-selected="false" tabindex="-1">Links</button>
+                  <button class="tabs__tab" role="tab" id="desatab-impact" aria-controls="desapanel-impact" aria-selected="false" tabindex="-1">Impact &amp; notes</button>
                 </div>
 
                 <!-- Overview -->
@@ -243,16 +243,11 @@
                   </div>
                 </div>
 
-                <!-- Links -->
-                <div class="tabs__panel" role="tabpanel" id="desapanel-links" aria-labelledby="desatab-links" tabindex="0" hidden>
-                  <div class="callout">Internal tool; code not public due to confidentiality. Demo video below.</div>
-                  <ul class="desa-artifacts">
-                    <li>A screen-recorded demo video (e.g. the error classifier catching a bad pipeline run, or the chatbot executing a command/skill).</li>
-                    <li>A simplified architecture diagram with no internal URLs, server names, or proprietary logic (see the Architecture tab).</li>
-                    <li>The chatbot's system prompt and command/skill definitions, with a note on guardrails.</li>
-                    <li>The MCP tool schema exposed to the model, with parameter descriptions.</li>
-                    <li>A short explanation of the sanitization → classification pipeline logic.</li>
-                  </ul>
+                <!-- Impact & notes -->
+                <div class="tabs__panel" role="tabpanel" id="desapanel-impact" aria-labelledby="desatab-impact" tabindex="0" hidden>
+                  <p>Before this, the team tracked pipeline issues, data quality problems, and access requests across scattered chats and ad-hoc tickets. The platform pulls all of that into one place — and the whole data engineering team is moving onto it as their main workflow tool.</p>
+                  <p>The part I'm proudest of is the error pipeline catching bad runs on its own, instead of someone noticing after the fact. Getting the chatbot to actually <em>do things</em> — run real pipeline commands through MCP, not just answer questions — was the trickiest and most fun part to build.</p>
+                  <div class="callout">It's an internal tool, so the code stays private — but I've got a demo video and I'm always happy to walk through how it works.</div>
                 </div>
               </div>
             </div>
@@ -284,7 +279,7 @@
           <div class="layout__rail">
             <p class="eyebrow">Experience</p>
             <h2 class="section__title">What I've worked on</h2>
-            <p class="section__lead">Paid work and teaching, plus the student orgs I've helped run. Most recent first.</p>
+            <p class="section__lead">Paid work and teaching, plus the student orgs I've helped run.</p>
           </div>
           <div class="layout__body">
             <div class="tl-group">
@@ -306,7 +301,6 @@
         <header class="section-head">
           <p class="eyebrow">Skills</p>
           <h2 class="section__title">Tools I reach for</h2>
-          <p class="section__lead">Grouped by what they're for.</p>
         </header>
         <dl class="skillsheet" id="skills-sheet"></dl>
       </div>
@@ -318,7 +312,7 @@
         <header class="section-head">
           <p class="eyebrow">Education</p>
           <h2 class="section__title">Where I study</h2>
-          <p class="section__lead">One double degree, two universities, run in parallel.</p>
+          <p class="section__lead">Two degrees, two universities, run in parallel.</p>
         </header>
         <div class="edu-split" id="education-grid"></div>
       </div>

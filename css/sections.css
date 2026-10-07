@@ -451,23 +451,6 @@
 .tl-item__logo--pink.is-fallback { background: var(--pink); color: var(--pink-ink); }
 .tl-item__logo--mint.is-fallback { background: var(--mint); color: var(--mint-ink); }
 
-/* "view photos" trigger on timeline entries with images */
-.tl-item__photos {
-  margin-top: 12px;
-  font: inherit;
-  font-size: 13px;
-  color: var(--blue-ink);
-  background: none;
-  border: none;
-  padding: 4px 0;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-}
-.tl-item__photos span { font-size: 12px; }
-.tl-item__photos:hover { text-decoration: underline; }
-
 /* each role within an org */
 .tl-role {
   margin-top: 14px;

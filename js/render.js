@@ -63,10 +63,9 @@ function desaFeaturedCard() {
   const top = el('div', 'proj__top');
   const name = el('span', 'proj__name');
   name.textContent = 'BINUS EDM DESA';
-  const badge = el('span', 'proj__badge');
-  badge.textContent = 'flagship';
-  badge.style.background = 'var(--pink)';
-  badge.style.color = 'var(--pink-ink)';
+  const badge = el('span', 'proj__spark');
+  badge.textContent = '\u2726';
+  badge.setAttribute('aria-label', 'Highlighted project');
   top.append(name, badge);
   a.appendChild(top);
 
@@ -258,16 +257,6 @@ function timelineItem(entry) {
 
   entry.roles.forEach((role) => content.appendChild(roleBlock(role)));
 
-  // entries with photos get a "view photos" trigger that opens the modal gallery
-  if (entry.images && entry.images.length) {
-    const photos = el('button', 'tl-item__photos');
-    photos.type = 'button';
-    photos.innerHTML = `<span aria-hidden="true">▣</span> View photos (${entry.images.length})`;
-    photos.setAttribute('aria-label', `View photos from ${entry.org}`);
-    photos.addEventListener('click', () => openExperienceModal(entry));
-    content.appendChild(photos);
-  }
-
   item.appendChild(content);
   return item;
 }
@@ -420,8 +409,10 @@ export function renderHeroTagline() {
 /* ---------- Gallery (modal only; degrades to nothing if files missing) ---------- */
 /* Returns markup for a gallery; images are hidden individually on load error,
    and the whole block removes itself if every image fails. */
-function galleryMarkup(images, accent) {
+function galleryMarkup(images, accent, aspect) {
   if (!images || !images.length) return '';
+  // aspect: 'landscape' (default) | 'portrait' | 'square' — sets tile shape
+  const ratio = ['portrait', 'square', 'landscape'].includes(aspect) ? aspect : 'landscape';
   const tiles = images.map((img, idx) => `
     <figure class="gallery__item gallery__item--${accent}">
       <button class="gallery__btn" type="button" data-full="${esc(img.src)}" data-caption="${esc(img.caption || '')}" aria-label="View larger: ${esc(img.caption || 'image')}">
@@ -429,7 +420,7 @@ function galleryMarkup(images, accent) {
       </button>
       ${img.caption ? `<figcaption class="gallery__cap">${esc(img.caption)}</figcaption>` : ''}
     </figure>`).join('');
-  return `<div class="gallery" data-gallery>${tiles}</div>`;
+  return `<div class="gallery gallery--${ratio}" data-gallery>${tiles}</div>`;
 }
 
 /* Attach error handling + lightbox after the gallery HTML is inserted. */
@@ -526,7 +517,7 @@ export function openModal(p) {
   if (p.subtitle) parts.push(`<p class="proj__summary"><em>${esc(p.subtitle)}</em></p>`);
 
   // gallery sits right under the title
-  parts.push(galleryMarkup(p.images, p.accent));
+  parts.push(galleryMarkup(p.images, p.accent, p.aspect));
 
   parts.push('<div class="pill-row">');
   p.tags.forEach((t) => parts.push(`<span class="pill pill--${p.accent}">${esc(t)}</span>`));
@@ -557,27 +548,6 @@ export function openModal(p) {
     ));
     parts.push('</div>');
   }
-
-  showModal(parts.join(''));
-}
-
-/* Experience modal — reuses the same modal + gallery for org entries. */
-export function openExperienceModal(entry) {
-  lastFocused = document.activeElement;
-  const parts = [];
-  parts.push(`<h2 id="modal-title">${esc(entry.org)}</h2>`);
-  parts.push(galleryMarkup(entry.images, entry.accent));
-
-  entry.roles.forEach((role) => {
-    parts.push(`<h3>${esc(role.title)}</h3>`);
-    parts.push(`<p class="flagship__meta">${esc(role.meta)}</p>`);
-    if (role.summary) parts.push(`<p><em>${esc(role.summary)}</em></p>`);
-    if (role.points && role.points.length) {
-      parts.push('<ul>');
-      role.points.forEach((pt) => parts.push(`<li>${esc(pt)}</li>`));
-      parts.push('</ul>');
-    }
-  });
 
   showModal(parts.join(''));
 }

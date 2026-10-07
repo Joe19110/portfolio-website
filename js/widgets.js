@@ -230,7 +230,7 @@ export function renderMarquee() {
   if (!track) return;
   // one full pass through the messages, each followed by a ✦ separator
   const pass = MARQUEE_ITEMS
-    .map((msg) => `<span>&nbsp;${esc(msg)}&nbsp;\u2726</span>`)
+    .map((msg) => `<span>${esc(msg)}<span class="marquee__star">\u2726</span></span>`)
     .join('');
   // duplicate back-to-back so the -50% CSS loop has no visible seam
   track.innerHTML = pass + pass;

@@ -87,10 +87,6 @@ export const EXPERIENCE = [
     kind: 'work',
     accent: 'blue',
     logo: 'assets/logos/binus.png',
-    images: [
-      { src: 'assets/experience/binus-promo-team.jpg', caption: 'Promotion team' },
-      { src: 'assets/experience/binus-promo-infosession.jpg', caption: 'Info session' },
-    ],
     roles: [{
       title: 'Team Promotion',
       meta: 'Part-time · Oct 2025 – Present · On-site',
@@ -106,10 +102,6 @@ export const EXPERIENCE = [
     kind: 'org',
     accent: 'mint',
     logo: 'assets/logos/robogals.png',
-    images: [
-      { src: 'assets/experience/robogals-onboarding.jpg', caption: 'Chapter onboarding' },
-      { src: 'assets/experience/robogals-kiwihosting.jpg', caption: 'Kiwihosting workshop' },
-    ],
     roles: [
       {
         title: 'Vice President',
@@ -135,10 +127,6 @@ export const EXPERIENCE = [
     kind: 'org',
     accent: 'pink',
     logo: 'assets/logos/gdgoc.png',
-    images: [
-      { src: 'assets/experience/gdgoc-gemma.jpg', caption: 'Gemma Workshop' },
-      { src: 'assets/experience/gdgoc-onboarding.jpg', caption: 'Team onboarding' },
-    ],
     roles: [{
       title: 'Technical Developer',
       meta: 'Nov 2024 – Aug 2025 · Jakarta · Hybrid',
@@ -155,10 +143,6 @@ export const EXPERIENCE = [
     kind: 'work',
     accent: 'blue',
     logo: 'assets/logos/binus.png',
-    images: [
-      { src: 'assets/experience/binus-ta-lab.jpg', caption: 'Database Technology lab session' },
-      { src: 'assets/experience/binus-mentor-certificate.jpg', caption: 'Mentor certificate' },
-    ],
     roles: [
       {
         title: 'Teaching Assistant — Database Technology',
@@ -184,10 +168,6 @@ export const EXPERIENCE = [
     kind: 'org',
     accent: 'blue',
     logo: 'assets/logos/binus.png',
-    images: [
-      { src: 'assets/experience/binus-ep-session.jpg', caption: 'EP facilitation session' },
-      { src: 'assets/experience/binus-fl-group.jpg', caption: 'Freshman Leader group' },
-    ],
     roles: [
       {
         title: 'Freshmen Partner',
@@ -212,10 +192,6 @@ export const EXPERIENCE = [
     kind: 'org',
     accent: 'mint',
     logo: 'assets/logos/himti.png',
-    images: [
-      { src: 'assets/experience/himti-committee.jpg', caption: 'Committee certificate' },
-      { src: 'assets/experience/himti-solana.jpg', caption: 'Solana event' },
-    ],
     roles: [{
       title: 'Activist, HIMTI Care',
       meta: 'Mar 2025 – Apr 2026 · Jakarta · Hybrid',
@@ -230,10 +206,6 @@ export const EXPERIENCE = [
     kind: 'org',
     accent: 'mint',
     logo: 'assets/logos/shecodes.png',
-    images: [
-      { src: 'assets/experience/shecodes-onboarding.jpg', caption: 'Onboarding' },
-      { src: 'assets/experience/shecodes-kartini.jpg', caption: 'Kartini Day 2025' },
-    ],
     roles: [{
       title: 'Admin',
       meta: 'Feb 2025 – Jun 2025 · Jakarta · Hybrid',
