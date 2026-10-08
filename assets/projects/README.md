@@ -8,8 +8,7 @@ Filenames are referenced in `projects.json` → each project's `images[]` array.
 
 | Filename                                | Project / caption                      |
 |-----------------------------------------|----------------------------------------|
-| `privasimu-dpia.png`                    | Privasimu — DPIA Insight risk heatmap  |
-| `privasimu-ropa.png`                    | Privasimu — ROPA interface             |
+| `privasimu-certificate.jpg`             | Privasimu — internship certificate (opens in lightbox popup) |
 | `gender-income-mase.png`                | Gender Income Gap — MASE comparison    |
 | `gender-income-forecast.png`            | Gender Income Gap — 2024–2026 forecast |
 | `kitchen-serve-portal.png`              | Kitchen Serve+ — staff portal          |
@@ -22,8 +21,9 @@ Filenames are referenced in `projects.json` → each project's `images[]` array.
 | `catch-n-collect-stickerbook.png`       | Catch n' Collect — stickerbook         |
 
 ## Notes
-- **BINUS EDM DESA** has NO screenshots here on purpose — it's confidentiality-bound.
-  Its visuals are the architecture diagram + demo video only (see CLAUDE.md).
+- **BINUS EDM DESA** and **Privasimu** have NO screenshots on purpose — both are
+  confidentiality-bound. DESA shows only its architecture diagram; Privasimu links to
+  an internship certificate instead (set the URL in `projects.json`).
 - **Genshin assistant** is in progress — no images until it's built.
 - Tiles render at a 4:3 aspect ratio with `object-fit: cover`, so any size lines up.
 - Prefer compressed PNG/JPG/WebP under ~300 KB each. Add/rename entries in `projects.json`.

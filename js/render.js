@@ -565,6 +565,10 @@ function showModal(html) {
   const content = $('#modal-content');
   content.innerHTML = html;
   wireGallery(content);
+  // certificate buttons open their image in the lightbox
+  content.querySelectorAll('.modal__cert').forEach((btn) => {
+    btn.addEventListener('click', () => openLightbox(btn.dataset.certSrc, btn.dataset.certCap));
+  });
   const modal = $('#modal');
   modal.hidden = false;
   document.body.style.overflow = 'hidden';
@@ -612,11 +616,22 @@ export function openModal(p) {
   p.stack.forEach((s) => parts.push(`<span class="pill">${esc(s)}</span>`));
   parts.push('</div>');
 
-  if (p.links && p.links.length) {
+  // optional confidentiality / context note
+  if (p.note) parts.push(`<div class="callout">${esc(p.note)}</div>`);
+
+  if ((p.links && p.links.length) || p.certificate) {
     parts.push('<h3>Links</h3><div class="modal__links">');
-    p.links.forEach((l) => parts.push(
-      `<a href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.label)}</a>`
-    ));
+    if (p.links) {
+      p.links.forEach((l) => parts.push(
+        `<a href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.label)}</a>`
+      ));
+    }
+    // certificate opens as an image in the lightbox (not a nav-away link)
+    if (p.certificate) {
+      parts.push(
+        `<button type="button" class="modal__cert" data-cert-src="${esc(p.certificate.src)}" data-cert-cap="${esc(p.certificate.caption || '')}">${esc(p.certificate.label || 'View certificate')}</button>`
+      );
+    }
     parts.push('</div>');
   }
 

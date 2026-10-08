@@ -21,14 +21,10 @@
     ],
     "stack": ["Next.js", "React", "TypeScript", "Tailwind CSS", "Laravel (PHP)", "PostgreSQL", "RAG", "Strapi"],
     "aspect": "landscape",
-    "images": [
-      { "src": "assets/projects/privasimu-dpia.png", "caption": "DPIA Insight — risk heatmap view" },
-      { "src": "assets/projects/privasimu-ropa.png", "caption": "ROPA interface" }
-    ],
+    "note": "Some work and materials can't be shared publicly due to client confidentiality — happy to walk through what I can in a conversation.",
+    "certificate": { "label": "Internship certificate", "src": "assets/projects/privasimu-certificate.jpg", "caption": "Privasimu — internship completion certificate" },
     "links": [
-      { "label": "Live — privasimu.com", "url": "https://privasimu.com" },
-      { "label": "Demo video", "url": "https://youtu.be/b3HoGm2rBAo" },
-      { "label": "Monthly reports", "url": "https://bit.ly/4uBxCpg" }
+      { "label": "Live — privasimu.com", "url": "https://privasimu.com" }
     ]
   },
   {
@@ -90,7 +86,8 @@
     "links": [
       { "label": "Live — kitchen-serve-frontend.vercel.app", "url": "https://kitchen-serve-frontend.vercel.app" },
       { "label": "GitHub", "url": "https://github.com/Joe19110/KitchenServe" },
-      { "label": "Demo video", "url": "https://youtu.be/i31Xsk1Hf-o" }
+      { "label": "Demo video", "url": "https://youtu.be/i31Xsk1Hf-o" },
+      { "label": "Surat Pencatatan Ciptaan", "url": "https://drive.google.com/file/d/1zmEaDKY2eiiNOH3FOD422lXTLdDFNpq3/view?usp=sharing" }
     ]
   },
   {
