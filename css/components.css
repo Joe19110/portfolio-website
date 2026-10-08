@@ -404,6 +404,7 @@
   grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
   gap: 12px;
   margin: 14px 0 20px;
+  align-items: start;   /* tiles size to their own image, not stretched to row height */
 }
 .gallery__item { margin: 0; }
 .gallery__btn {
@@ -422,20 +423,12 @@
 .gallery__item--mint .gallery__btn { box-shadow: inset 0 3px 0 var(--mint); }
 .gallery__img {
   width: 100%;
-  height: 100%;
-  /* shrink to fit the tile, keep aspect ratio, no cropping */
-  object-fit: contain;
+  height: auto;              /* tile height follows the image — no letterbox space */
   display: block;
-  background: transparent;
-  padding: 8px;
+  object-fit: contain;
   transition: transform 0.2s ease;
 }
 .gallery__btn:hover .gallery__img { transform: scale(1.03); }
-
-/* per-gallery tile shape (set from each project's `aspect`) */
-.gallery--landscape .gallery__btn { aspect-ratio: 16 / 10; }
-.gallery--portrait  .gallery__btn { aspect-ratio: 3 / 4; }
-.gallery--square    .gallery__btn { aspect-ratio: 1 / 1; }
 /* portrait tiles are tall, so give them a narrower column */
 .gallery--portrait { grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); }
 .gallery__cap {

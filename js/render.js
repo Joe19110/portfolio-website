@@ -6,7 +6,7 @@
 
 import { $, $$, el, esc } from './utils.js';
 import {
-  SKILL_GROUPS, DESA_STACK, NOW_ITEMS,
+  SKILL_GROUPS, DESA_STACK, NOW_ITEMS, SNAPS,
   EXPERIENCE, EDUCATION, CERTIFICATIONS, AWARDS, LANGUAGES, state,
 } from './data.js';
 
@@ -80,6 +80,15 @@ function desaFeaturedCard() {
   const summary = el('p', 'proj__summary');
   summary.textContent = 'An internal platform centralizing the data engineering team\u2019s workflow, with an AI chatbot that has live tool access to pipeline infrastructure.';
   a.appendChild(summary);
+
+  // tech tags, matching the regular project cards (first 5 of the DESA stack)
+  const tech = el('div', 'proj__tech');
+  DESA_STACK.slice(0, 5).forEach((t) => {
+    const pill = el('span', 'pill');
+    pill.textContent = t;
+    tech.appendChild(pill);
+  });
+  a.appendChild(tech);
 
   const link = el('span', 'proj__link');
   link.textContent = 'Read the full case study \u2192';
@@ -164,6 +173,68 @@ export function renderNowCard() {
     li.appendChild(k);
     li.appendChild(document.createTextNode(item.v));
     list.appendChild(li);
+  });
+}
+
+/* ---------- Snaps: polaroid scatter (About) ---------- */
+/* colored placeholder shown until a real photo file exists */
+function snapPlaceholder(caption, accent) {
+  const fills = {
+    pink: ['#F4C0D1', '#4B1528'],
+    blue: ['#BEDCF4', '#0C447C'],
+    mint: ['#B9E7D7', '#085041'],
+  };
+  const [bg, ink] = fills[accent] || fills.blue;
+  const svg =
+    `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 300'>` +
+    `<rect width='300' height='300' fill='${bg}'/>` +
+    `<text x='150' y='150' font-family='sans-serif' font-size='64' fill='${ink}' ` +
+    `text-anchor='middle' dominant-baseline='central' opacity='0.55'>\u2726</text></svg>`;
+  return `data:image/svg+xml,${encodeURIComponent(svg)}`;
+}
+
+function snapCard(snap, angle) {
+  const fallback = snapPlaceholder(snap.caption, snap.accent);
+  const card = el('button', `snap snap--${snap.accent}`);
+  card.type = 'button';
+  card.style.setProperty('--snap-rot', `${angle}deg`);
+  card.setAttribute('aria-label', `View photo: ${snap.caption}`);
+
+  const img = el('img', 'snap__img');
+  img.src = snap.src;
+  img.alt = snap.caption;
+  img.loading = 'lazy';
+  // swap to the colored placeholder if the real file isn't there yet
+  img.addEventListener('error', () => { img.src = fallback; card.classList.add('is-placeholder'); });
+
+  const cap = el('span', 'snap__cap');
+  cap.textContent = snap.caption;
+
+  card.append(img, cap);
+  card.addEventListener('click', () => {
+    openLightbox(card.classList.contains('is-placeholder') ? fallback : snap.src, snap.caption);
+  });
+  return card;
+}
+
+export function renderSnaps() {
+  const wrap = $('#snaps');
+  if (!wrap) return;
+  wrap.innerHTML = '';
+  // fixed (not random) rotation angles so the desktop scatter looks deliberate
+  const angles = [-5, 3, -2, 4, -3, 2];
+
+  // real cards
+  SNAPS.forEach((snap, i) => wrap.appendChild(snapCard(snap, angles[i % angles.length])));
+
+  // duplicate set (aria-hidden) so the mobile marquee loop has no visible seam;
+  // harmless on desktop where the track doesn't animate
+  SNAPS.forEach((snap, i) => {
+    const clone = snapCard(snap, angles[i % angles.length]);
+    clone.setAttribute('aria-hidden', 'true');
+    clone.tabIndex = -1;
+    clone.classList.add('snap--clone');
+    wrap.appendChild(clone);
   });
 }
 

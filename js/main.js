@@ -7,7 +7,7 @@ import { $, loadJSON } from './utils.js';
 import { state, resolveProfile } from './data.js';
 import {
   renderFeatured, renderWork, renderSkills, renderDesaStack,
-  renderNowCard, renderExperience, renderEducation, renderAwards,
+  renderNowCard, renderSnaps, renderExperience, renderEducation, renderAwards,
   renderHeroTagline, wireModal,
 } from './render.js';
 import { runTerminal, renderMarquee, wireNav, wireTabs, wireScrollSpy } from './widgets.js';
@@ -35,6 +35,7 @@ async function init() {
   safe('marquee', renderMarquee);
   safe('desaStack', renderDesaStack);
   safe('nowCard', renderNowCard);
+  safe('snaps', renderSnaps);
   safe('experience', renderExperience);
   safe('education', renderEducation);
   safe('awards', renderAwards);

@@ -58,7 +58,7 @@
           <div class="hero__col">
             <span class="sticker" aria-hidden="true">✦</span>
             <h1 class="hero__headline" id="hero-headline">
-              <span class="highlight">I build</span> backend systems, data pipelines, and the AI tooling on top.
+              <span class="highlight">I build</span> backend systems, data pipelines, and the AI tools on top.
             </h1>
             <p class="hero__support">Always open to new opportunities in backend, data, and AI engineering.</p>
             <div class="hero__cta">
@@ -113,7 +113,7 @@
           <div class="layout__rail">
             <p class="eyebrow">Featured work</p>
             <h2 class="section__title">A few things I've built</h2>
-            <p class="section__lead">A quick pick of recent projects — the full archive is further down.</p>
+            <p class="section__lead">A few projects I'm proud of, more in the full archive below.</p>
             <p class="featured__more"><a href="#work">See all work ↓</a></p>
           </div>
           <div class="layout__body">
@@ -129,20 +129,33 @@
         <div class="layout">
           <div class="layout__rail">
             <p class="eyebrow">About</p>
-            <h2 class="section__title">Hi, I'm Joelliane <span class="sticker sticker--inline" aria-hidden="true">👋</span></h2>
-            <p class="section__lead">A student who likes building things meant to be used, not just graded.</p>
+            <h2 class="section__title">Hi, I'm Joelliane <svg class="title-icon title-icon--wave" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 11V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2"/><path d="M14 10V4a2 2 0 0 0-2-2a2 2 0 0 0-2 2v2"/><path d="M10 10.5V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2v8"/><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/></svg></h2>
+            <figure class="about-photo">
+              <img src="assets/me.jpg" alt="Joelliane Anggra"
+                   onerror="this.closest('.about-photo').classList.add('is-empty'); this.remove();">
+              <span class="about-sticker about-sticker--tl" aria-hidden="true">✦</span>
+              <span class="about-sticker about-sticker--br" aria-hidden="true">&lt;/&gt;</span>
+            </figure>
           </div>
           <div class="layout__body">
             <div class="about__body">
               <div class="prose">
-                <p>I'm a third-year Computer Science and Software Engineering student who likes building things that are meant to be used, not just graded. I've worked on a mobile platform for STEM education, AI-powered features during my internship, and a physics-based claw machine game. They're different problems, but in each one the part I care about most is the same: taking an idea and figuring out how to make it actually work.</p>
-                <p>In practice, that means a lot of debugging. On Cuanin, that was tracking down why an escrow refund wasn't routing back to the right user. On STEMM Lab, it was figuring out why the app crashed when someone tapped a button too fast. I learn more from fixing problems like these than from the parts of a project that go smoothly the first time. That's part of why I try to design things with an actual user flow in mind — payments, login states, edge cases — instead of just building toward a spec.</p>
-                <p>It's also why I look for projects outside what I already know. New tools, unfamiliar problems, or people who approach things differently all mean more of that same kind of problem-solving, which is the part I've realized I actually want more of.</p>
+                <p>I'm a third-year Computer Science and Software Engineering student who likes building things that are meant to be used, not just graded.</p>
+                <p>I've realized that the part of tech I enjoy most is figuring things out. I like taking an idea that doesn't fully make sense yet, breaking it down, and working through the problems until I understand how to make it work. A lot of that ends up being debugging, experimenting, and probably going down a few unnecessary rabbit holes along the way.</p>
+                <p>I also care a lot about the people using what I build. I don't want to think of software as just something that works technically. I like thinking about how someone would actually use it, where they might get confused, what happens when something goes wrong, and whether the solution makes sense from their perspective.</p>
+                <p>That's also why I like working on things outside what I already know. I've worked across mobile development, AI, web development, and research, and each one has forced me to approach problems differently. I usually learn the most when I don't already know the answer.</p>
+                <p>Right now, I'm still figuring out exactly where I want to take that curiosity, but I know I want to keep building, keep learning, and work on problems where I get to understand both the technology and the people using it.</p>
               </div>
               <aside class="now-card" aria-label="Currently">
                 <h3><span class="status-dot" aria-hidden="true"></span> Currently</h3>
                 <ul id="now-list"></ul>
               </aside>
+            </div>
+
+            <!-- polaroid scatter of community / event photos -->
+            <div class="snaps">
+              <p class="snaps__label">Out in the wild <span aria-hidden="true">✦</span></p>
+              <div class="snaps__scatter" id="snaps"></div>
             </div>
           </div>
         </div>
@@ -157,7 +170,7 @@
             <p class="eyebrow">Highlighted project</p>
             <h2 class="section__title">BINUS EDM DESA</h2>
             <div class="pill-row">
-              <span class="pill pill--blue">Backend</span>
+              <span class="pill pill--pink">Backend</span>
               <span class="pill pill--pink">Data Engineering</span>
               <span class="pill pill--pink">AI Engineering</span>
             </div>
@@ -167,7 +180,7 @@
             <div class="flagship">
               <div class="flagship__head">
                 <p class="flagship__meta"><strong>Role:</strong> Associate Member Data Engineer, BINUS IT Division</p>
-                <p class="flagship__meta"><strong>Type:</strong> Internal tool, in active rollout — the full data engineering team is migrating onto it as their primary workflow tool.</p>
+                <p class="flagship__meta"><strong>Type:</strong> Internal tool, in active development.</p>
               </div>
 
               <!-- Sub-tabs -->
@@ -181,7 +194,7 @@
 
                 <!-- Overview -->
                 <div class="tabs__panel" role="tabpanel" id="desapanel-overview" aria-labelledby="desatab-overview" tabindex="0">
-                  <p>An internal platform centralizing the data engineering team's workflow — pipeline failures, data quality issues, access requests, schema changes, source onboarding — replacing ad-hoc ticket handling with one system. It includes an AI chatbot with tool access to live pipeline infrastructure.</p>
+                  <p>An internal platform centralizing the data engineering team's workflow: pipeline failures, data quality issues, access requests, schema changes, source onboarding; replacing ad-hoc ticket handling with one system. It includes an AI chatbot with tool access to live pipeline infrastructure.</p>
                   <h3 class="h3">Stack</h3>
                   <div class="pill-row" id="desa-stack"></div>
                 </div>
@@ -193,9 +206,8 @@
                     <li>Linked the error-classification pipeline to Langfuse for tracing and observability.</li>
                     <li>Implemented the RAGAS evaluation pipeline for the project's RAG system.</li>
                     <li>Implemented RustFS (S3-compatible object storage) integration for pipeline archive storage.</li>
-                    <li>Built complex chatbot features including command/skill-based actions, not just Q&A.</li>
-                    <li>Built the FastAPI backend tying these pieces together, with MCP giving the chatbot direct tool access to Delman pipeline operations.</li>
                     <li>Used Docker for containerized execution and n8n for workflow automation.</li>
+                    <li class="is-building">Currently building complex chatbot features including command/skill-based actions, not just Q&A.</li>
                   </ul>
                 </div>
 
@@ -245,9 +257,9 @@
 
                 <!-- Impact & notes -->
                 <div class="tabs__panel" role="tabpanel" id="desapanel-impact" aria-labelledby="desatab-impact" tabindex="0" hidden>
-                  <p>Before this, the team tracked pipeline issues, data quality problems, and access requests across scattered chats and ad-hoc tickets. The platform pulls all of that into one place — and the whole data engineering team is moving onto it as their main workflow tool.</p>
-                  <p>The part I'm proudest of is the error pipeline catching bad runs on its own, instead of someone noticing after the fact. Getting the chatbot to actually <em>do things</em> — run real pipeline commands through MCP, not just answer questions — was the trickiest and most fun part to build.</p>
-                  <div class="callout">It's an internal tool, so the code stays private — but I've got a demo video and I'm always happy to walk through how it works.</div>
+                  <p>Before this, the team tracked pipeline issues, data quality problems, and access requests across scattered chats and ad-hoc tickets. The platform pulls all of that into one place and the plan is for the whole data engineering team to migrate onto it as their main workflow tool.</p>
+                  <p>This project has pushed me the most so far. It's my first time working with real data pipelines, observability, and an AI system that has to be reliable rather than just clever and figuring out how all those pieces fit together end-to-end is exactly the kind of problem I enjoy sinking my teeth into.</p>
+                  <!-- <div class="callout">Code stays private, but feel free to <a class="callout__link" href="#" target="_blank" rel="noopener">watch this demo video →</a></div> -->
                 </div>
               </div>
             </div>
@@ -349,7 +361,7 @@
       <div class="container">
         <div class="contact-cta">
           <p class="eyebrow">Contact</p>
-          <h2 class="contact-cta__title">Let's build something <span class="sticker sticker--inline" aria-hidden="true">🚀</span></h2>
+          <h2 class="contact-cta__title">Let's build something <svg class="title-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09"/><path d="M9 12a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.4 22.4 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 .05 5 .05"/></svg></h2>
           <p class="contact-cta__lead">Interested in working together, discussing a project, or just talking tech?</p>
           <a class="contact-cta__email" href="mailto:joelliane@gmail.com">joelliane@gmail.com</a>
           <div class="contact-cta__links">

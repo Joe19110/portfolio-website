@@ -16,9 +16,24 @@ export const SKILL_GROUPS = [
 export const DESA_STACK = ['Python (FastAPI)', 'React', 'Docker', 'n8n', 'Pinecone', 'pgvector', 'RAGAS', 'Langfuse', 'MCP', 'RustFS'];
 
 export const NOW_ITEMS = [
-  { k: 'Building', v: 'Data engineering & AI tooling, BINUS IT Division' },
-  { k: 'Studying', v: 'CS (Binus Intl) × Software Engineering (La Trobe), 3rd year' },
+  { k: 'Building', v: 'Data engineering & AI tooling @ Binus IT Division' },
+  { k: 'Studying', v: 'CS (Binus International) × Software Engineering (La Trobe), 3rd year' },
   { k: 'Exploring', v: 'RAG evaluation, MCP tooling, pipeline observability' },
+];
+
+/* ------------------------------------------------------------
+   SNAPS — community / event photos shown as a polaroid scatter
+   in About. `src` points to assets/experience/*; if the file is
+   missing, a colored placeholder with the caption is shown instead.
+   `accent` sets the placeholder colour + card stripe.
+   ------------------------------------------------------------ */
+export const SNAPS = [
+  { src: 'assets/experience/gdgoc-gemma.jpg', caption: 'gdgoc gemma workshop', accent: 'pink' },
+  { src: 'assets/experience/robogals-onboarding.jpg', caption: 'robogals onboarding', accent: 'mint' },
+  { src: 'assets/experience/aiesec-boothing.jpg', caption: 'aiesec boothing', accent: 'blue' },
+  { src: 'assets/experience/shecodes-onboarding.jpg', caption: 'shecodes onboarding', accent: 'pink' },
+  { src: 'assets/experience/binus-fl-group.jpg', caption: 'freshman leaders', accent: 'blue' },
+  { src: 'assets/experience/binus-it-data-engineers.jpg', caption: 'it div data engineers', accent: 'pink' },
 ];
 
 /* ------------------------------------------------------------

@@ -5,16 +5,16 @@
     "subtitle": "Privacy Compliance & AI Platform (ROPA & DPIA)",
     "accent": "pink",
     "tags": ["Frontend", "Backend Integration", "AI Engineering"],
-    "role": "Front-End Development & AI Agent Evaluation",
+    "role": "Full-Stack Development",
     "type": "Internship, team project",
     "summary": "A privacy compliance platform supporting ROPA and DPIA workflows, with AI-assisted compliance insight generation.",
     "techTags": ["Next.js", "React", "TypeScript", "Tailwind CSS", "Laravel (PHP)", "PostgreSQL", "RAG", "Strapi"],
     "status": "shipped",
-    "overview": "A privacy compliance platform supporting ROPA and DPIA workflows. Work spanned frontend architecture, API integration, compliance logic, DPIA risk visualization, and AI-assisted compliance insight generation — including evaluating the AI outputs themselves. I built features used by Privasimu's enterprise clients, including BCA, KAI, BRI Life, and Bluebird.",
+    "overview": "A privacy compliance platform supporting ROPA and DPIA workflows. Work spanned frontend architecture, API integration, compliance logic, DPIA risk visualization, and AI-assisted compliance insight generation, including evaluating the AI outputs themselves. I built features used by Privasimu's enterprise clients, including BCA, KAI, BRI Life, and Bluebird.",
     "contributions": [
       "ROPA platform: built and modified ROPA interfaces; connected frontend to backend APIs; worked with compliance data spanning Indonesian PDP, GDPR, UK GDPR, Singapore PDPA, and CCPA-related exports; structured compliance fields (Controller Identity, Data Subject Rights & Compliance Status, standards/required_for).",
-      "DPIA system & risk logic: I built the DPIA Insight interface — questions answered → risk classified → visualized → AI mitigation guidance. I implemented deterministic risk classification across four answer states (Penuh / Sebagian / Tidak / Tidak Berlaku) and a risk matrix (Penuh/Tidak Berlaku → (1,1), Sebagian → (3,3), Tidak → (4,5)); I built the question, heatmap, and summary views.",
-      "DPIA Insight AI: I built the frontend (Next.js/TypeScript/Tailwind) for an AI-assisted workflow — DPIA results pass through a Laravel API into an AI/RAG layer grounded in privacy/security standards, returning mitigation guidance.",
+      "DPIA system & risk logic: I built the DPIA Insight interface: questions answered → risk classified → visualized → AI mitigation guidance. I implemented deterministic risk classification across four answer states (Penuh / Sebagian / Tidak / Tidak Berlaku) and a risk matrix (Penuh/Tidak Berlaku → (1,1), Sebagian → (3,3), Tidak → (4,5)); I built the question, heatmap, and summary views.",
+      "DPIA Insight AI: I built the frontend (Next.js/TypeScript/Tailwind) for an AI-assisted workflow; DPIA results pass through a Laravel API into an AI/RAG layer grounded in privacy/security standards, returning mitigation guidance.",
       "RAG / ISO standards: I turned excerpts from ISO/IEC 27701:2025, ISO/IEC 20889:2018, and ISO/IEC 24745:2022 into grounded, Indonesian-language mitigation guidance, including handling missing-knowledge cases.",
       "AI agent evaluation: I evaluated whether retrieved information supported AI answers and whether mitigation guidance was contextually relevant; implemented fallback behavior for unavailable AI/API key.",
       "Shipped 5+ pages across 2 deployed platforms; contributed frontend/animations for KartiniLove.ai; worked with Strapi for blog/content."
@@ -38,17 +38,17 @@
     "accent": "pink",
     "tags": ["Data Science", "ML Research"],
     "role": "Team member, research/modeling contribution",
-    "type": "Research paper project",
-    "summary": "Research analyzing the U.S. gender income gap using ACS PUMS data (2014–2023), comparing seven forecasting approaches before generating 2024–2026 projections.",
+    "type": "Research paper — published at ICISS",
+    "summary": "Published research analyzing the U.S. gender income gap using ACS PUMS data (2014–2023), comparing seven forecasting approaches before generating 2024–2026 projections.",
     "techTags": ["Python", "pandas", "statsmodels", "Prophet", "XGBoost"],
     "status": "shipped",
     "overview": "Research analyzing the U.S. gender income gap using ACS PUMS data (2014–2023), comparing seven forecasting approaches via MASE before generating 2024–2026 projections. The 2024–2026 figures are presented as model projections, not predictions.",
     "contributions": [
       "Processed and analyzed 2014–2023 ACS PUMS data; calculated the 2023 gap: $25,684.",
       "Compared Linear Regression, Prophet, LSTM, SARIMA, ARIMA, XGBoost, and a naive baseline.",
-      "Evaluated with MASE — Linear Regression 0.369, Prophet 0.377, LSTM 1.555, SARIMA 2.313, ARIMA 2.414, Naive 2.415, XGBoost 2.416 (the simpler models won).",
+      "Evaluated with MASE: Linear Regression 0.369, Prophet 0.377, LSTM 1.555, SARIMA 2.313, ARIMA 2.414, Naive 2.415, XGBoost 2.416 (the simpler models won).",
       "I compared seven forecasting approaches and generated projections for 2024–2026: $25,872 · $26,380 · $26,889.",
-      "Documented methodology and findings in a research paper."
+      "Documented methodology and findings in a research paper, published at ICISS."
     ],
     "stack": ["Python", "pandas", "statsmodels", "Prophet", "XGBoost"],
     "aspect": "landscape",
@@ -56,7 +56,10 @@
       { "src": "assets/projects/gender-income-mase.png", "caption": "MASE comparison across seven models" },
       { "src": "assets/projects/gender-income-forecast.png", "caption": "2024–2026 projections" }
     ],
-    "links": []
+    "links": [
+      { "label": "Published paper — IEEE (DOI)", "url": "https://doi.org/10.1109/ICISS71466.2026.11715274" },
+      { "label": "Read the paper (PDF)", "url": "https://drive.google.com/file/d/1dKlcmDOsCb_YHDH7JFkC6bfWqk1nyGwe/view?usp=sharing" }
+    ]
   },
   {
     "id": "kitchen-serve",
@@ -69,15 +72,14 @@
     "summary": "A full-stack platform for Cihen Kitchen centralizing support, communication, and operational workflows.",
     "techTags": ["React", "Vite", "Tailwind CSS", "Redux", "Node.js", "Express.js", "MongoDB", "JWT", "Cloudinary", "Swagger", "Docker", "Gemini", "Vercel"],
     "status": "shipped",
-    "overview": "A full-stack platform for Cihen Kitchen centralizing support, communication, and operational workflows — ticketing, staff/customer portals, chat, and an AI chatbot.",
+    "overview": "A full-stack platform for Cihen Kitchen centralizing support, communication, and operational workflows: ticketing, staff/customer portals, chat, and an AI chatbot.",
     "contributions": [
       "Built responsive interfaces with React, Vite, Tailwind CSS; used Redux for global state across portal/ticket/chat interfaces.",
       "Integrated the frontend with a Node.js/Express REST API (auth, user data, tickets, conversations).",
       "Implemented JWT authentication.",
       "Integrated Gemini to power the in-app AI chatbot, connected to application context.",
       "Used Cloudinary for media handling, Swagger for API docs.",
-      "Containerized with Docker; deployed on Vercel (zero-cost setup).",
-      "What went wrong: the deployed server went down at one point — a real lesson about the gap between a working local build and a maintained deployed service."
+      "Containerized with Docker; deployed on Vercel (zero-cost setup)."
     ],
     "stack": ["React", "Vite", "Tailwind CSS", "Redux", "Node.js", "Express.js", "MongoDB", "JWT", "Cloudinary", "Swagger", "Docker", "Gemini", "Vercel"],
     "aspect": "landscape",
@@ -120,7 +122,9 @@
     ],
     "links": [
       { "label": "GitHub", "url": "https://github.com/dreamsdagger/cuanin" },
-      { "label": "APK release", "url": "https://github.com/dreamsdagger/cuanin/releases/tag/v1.0.0" }
+      { "label": "APK release", "url": "https://github.com/dreamsdagger/cuanin/releases/tag/v1.0.0" },
+      { "label": "Demo video", "url": "https://drive.google.com/file/d/1O5a_JdWq6RjmVUt90sC9dKre1VEXozE3/view?usp=drive_link" },
+      { "label": "Pitch deck", "url": "https://drive.google.com/file/d/1KwjpFLfJjB1LTEYelTDsQ2wvzZzlrjtY/view?usp=drive_link" }
     ]
   },
   {
