@@ -16,15 +16,17 @@ Filenames are referenced in `projects.json` → each project's `images[]` array.
 | `cuanin-task.png`                       | Cuanin — task lifecycle screen         |
 | `cuanin-escrow.png`                     | Cuanin — escrow payment flow           |
 | `stemm-lab-home.png`                    | STEMM Lab — activity home              |
-| `stemm-lab-activity.png`                | STEMM Lab — sensor activity            |
+| `stemm-lab-sensor.png`                  | STEMM Lab — sensor activity            |
+| `genshin-assistant-chat.png`            | Genshin assistant — build & team comp chat |
 | `catch-n-collect-game.png`              | Catch n' Collect — gameplay            |
 | `catch-n-collect-stickerbook.png`       | Catch n' Collect — stickerbook         |
 
 ## Notes
 - **BINUS EDM DESA** and **Privasimu** have NO screenshots on purpose — both are
-  confidentiality-bound. DESA shows only its architecture diagram; Privasimu links to
-  an internship certificate instead (set the URL in `projects.json`).
-- **Genshin assistant** is in progress — no images until it's built.
+  confidentiality-bound. DESA shows only its architecture diagram; Privasimu shows its
+  internship certificate in a lightbox popup (`privasimu-certificate.jpg`).
+- **Genshin assistant** is still in progress but now has a chat screenshot
+  (`genshin-assistant-chat.png`).
 - Tiles render at a 4:3 aspect ratio with `object-fit: cover`, so any size lines up.
 - Prefer compressed PNG/JPG/WebP under ~300 KB each. Add/rename entries in `projects.json`.
 - Only post screenshots you have the right to show (no client data / internal URLs).

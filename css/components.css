@@ -415,13 +415,14 @@
 
 /* ---------- Modal gallery (Option B: images in modal only) ---------- */
 .gallery {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  display: flex;
+  flex-wrap: nowrap;        /* all images on one row */
   gap: 12px;
   margin: 14px 0 20px;
-  align-items: start;   /* tiles size to their own image, not stretched to row height */
+  align-items: start;       /* tiles size to their own image, not stretched */
+  justify-content: center;
 }
-.gallery__item { margin: 0; }
+.gallery__item { margin: 0; flex: 1 1 0; min-width: 0; }
 .gallery__btn {
   display: block;
   width: 100%;
@@ -444,8 +445,24 @@
   transition: transform 0.2s ease;
 }
 .gallery__btn:hover .gallery__img { transform: scale(1.03); }
-/* portrait tiles are tall, so give them a narrower column */
-.gallery--portrait { grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); }
+/* smaller projects (mobile apps + games): keep them compact + centered.
+   single image → ~half width; two images → a bit wider so each tile isn't tiny */
+.gallery--portrait,
+.gallery--square { margin-left: auto; margin-right: auto; }
+.gallery--portrait:has(.gallery__item:only-child),
+.gallery--square:has(.gallery__item:only-child) { max-width: 50%; }
+.gallery--portrait:has(.gallery__item:nth-child(2)),
+.gallery--square:has(.gallery__item:nth-child(2)) { max-width: 72%; }
+@media (max-width: 640px) {
+  .gallery--portrait:has(.gallery__item:only-child),
+  .gallery--square:has(.gallery__item:only-child) { max-width: 62%; }
+  .gallery--portrait:has(.gallery__item:nth-child(2)),
+  .gallery--square:has(.gallery__item:nth-child(2)) { max-width: 85%; }
+}
+/* very narrow screens: let a multi-image row wrap so tiles aren't crushed */
+@media (max-width: 420px) {
+  .gallery { flex-wrap: wrap; }
+}
 .gallery__cap {
   font-size: 12px;
   color: var(--muted-soft);

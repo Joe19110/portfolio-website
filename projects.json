@@ -54,7 +54,8 @@
     ],
     "links": [
       { "label": "Published paper — IEEE (DOI)", "url": "https://doi.org/10.1109/ICISS71466.2026.11715274" },
-      { "label": "Read the paper (PDF)", "url": "https://drive.google.com/file/d/1dKlcmDOsCb_YHDH7JFkC6bfWqk1nyGwe/view?usp=sharing" }
+      { "label": "Read the paper (PDF)", "url": "https://drive.google.com/file/d/1dKlcmDOsCb_YHDH7JFkC6bfWqk1nyGwe/view?usp=sharing" },
+      { "label": "GitHub", "url": "https://github.com/Joe19110/gender-income-gap-forecasting" }
     ]
   },
   {
@@ -145,7 +146,7 @@
     "aspect": "portrait",
     "images": [
       { "src": "assets/projects/stemm-lab-home.png", "caption": "Activity home screen" },
-      { "src": "assets/projects/stemm-lab-activity.png", "caption": "Sensor-based activity" }
+      { "src": "assets/projects/stemm-lab-sensor.png", "caption": "Sensor-based activity" }
     ],
     "links": [
       { "label": "GitHub", "url": "https://github.com/waengs/StemmLab" },
@@ -167,7 +168,13 @@
     "overview": "A RAG assistant over character build data (artifacts, weapons, team comps, talent materials) — a real tool for a problem Joelliane actually has, not a demo exercise. Purpose-built to be the portfolio's fully solo, individually-owned, evaluated AI/data project with zero ownership ambiguity.",
     "contributions": [],
     "stack": ["Python (FastAPI)", "Pinecone / pgvector", "RAGAS", "React"],
-    "links": []
+    "aspect": "square",
+    "images": [
+      { "src": "assets/projects/genshin-assistant-chat.png", "caption": "Build & team comp chat" }
+    ],
+    "links": [
+      { "label": "GitHub", "url": "https://github.com/Joe19110/genshin-assistant" }
+    ]
   },
   {
     "id": "catch-n-collect",
